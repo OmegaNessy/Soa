@@ -1,0 +1,42 @@
+[
+  {
+    "id": 1,
+    "faculty": {
+      "id": 1,
+      "name": "ФИТР",
+      "hostelRating": 0.0,
+      "studyRating": 0.0,
+      "studentAssetRating": 0.0,
+      "facultyRating": 0.0,
+      "campus": "11б",
+      "information": "говно",
+      "shortInformation": "говно"
+    },
+    "name": "ПОИТ",
+    "information": "говно",
+    "firstSubjectId": null,
+    "secondSubjectId": null,
+    "thirdSubjectId": null,
+    "passingScore": 340
+  },
+  {
+    "id": 2,
+    "faculty": {
+      "id": 1,
+      "name": "ФИТР",
+      "hostelRating": 0.0,
+      "studyRating": 0.0,
+      "studentAssetRating": 0.0,
+      "facultyRating": 0.0,
+      "campus": "11б",
+      "information": "говно",
+      "shortInformation": "говно"
+    },
+    "name": "ИСИТ",
+    "information": "говно",
+    "firstSubjectId": null,
+    "secondSubjectId": null,
+    "thirdSubjectId": null,
+    "passingScore": 300
+  }
+]

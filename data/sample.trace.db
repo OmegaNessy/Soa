@@ -1,0 +1,28 @@
+2021-04-12 13:29:39 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Таблица "SPECIALTY" не найдена
+Table "SPECIALTY" not found; SQL statement:
+select specialty0_.id as id1_1_, specialty0_.parent_id as parent_i8_1_, specialty0_.first_subject_id as first_su2_1_, specialty0_.information as informat3_1_, specialty0_.name as name4_1_, specialty0_.passing_score as passing_5_1_, specialty0_.second_subject_id as second_s6_1_, specialty0_.third_subject_id as third_su7_1_ from specialty specialty0_ [42102-200]
+2021-04-12 13:30:17 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Таблица "SPECIALTY" не найдена
+Table "SPECIALTY" not found; SQL statement:
+select specialty0_.id as id1_1_, specialty0_.parent_id as parent_i8_1_, specialty0_.first_subject_id as first_su2_1_, specialty0_.information as informat3_1_, specialty0_.name as name4_1_, specialty0_.passing_score as passing_5_1_, specialty0_.second_subject_id as second_s6_1_, specialty0_.third_subject_id as third_su7_1_ from specialty specialty0_ [42102-200]
+2021-04-12 13:32:09 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Таблица "FACULTIES" не найдена
+Table "FACULTIES" not found; SQL statement:
+select faculty0_.id as id1_0_, faculty0_.campus as campus2_0_, faculty0_.faculty_rating as faculty_3_0_, faculty0_.hostel_rating as hostel_r4_0_, faculty0_.information as informat5_0_, faculty0_.name as name6_0_, faculty0_.short_information as short_in7_0_, faculty0_.studentasset_rating as studenta8_0_, faculty0_.study_rating as study_ra9_0_ from faculties faculty0_ [42102-200]
+2021-04-12 13:36:50 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Таблица "FACULTIES" не найдена
+Table "FACULTIES" not found; SQL statement:
+select faculty0_.id as id1_0_, faculty0_.campus as campus2_0_, faculty0_.faculty_rating as faculty_3_0_, faculty0_.hostel_rating as hostel_r4_0_, faculty0_.information as informat5_0_, faculty0_.name as name6_0_, faculty0_.short_information as short_in7_0_, faculty0_.studentasset_rating as studenta8_0_, faculty0_.study_rating as study_ra9_0_ from faculties faculty0_ [42102-200]
+2021-04-12 13:39:57 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Таблица "FACULTIES" не найдена
+Table "FACULTIES" not found; SQL statement:
+select faculty0_.id as id1_0_, faculty0_.campus as campus2_0_, faculty0_.faculty_rating as faculty_3_0_, faculty0_.hostel_rating as hostel_r4_0_, faculty0_.information as informat5_0_, faculty0_.name as name6_0_, faculty0_.short_information as short_in7_0_, faculty0_.studentasset_rating as studenta8_0_, faculty0_.study_rating as study_ra9_0_ from faculties faculty0_ [42102-200]
+2021-04-12 13:41:06 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Таблица "FACULTIES" не найдена
+Table "FACULTIES" not found; SQL statement:
+select faculty0_.id as id1_0_, faculty0_.campus as campus2_0_, faculty0_.faculty_rating as faculty_3_0_, faculty0_.hostel_rating as hostel_r4_0_, faculty0_.information as informat5_0_, faculty0_.name as name6_0_, faculty0_.short_information as short_in7_0_, faculty0_.studentasset_rating as studenta8_0_, faculty0_.study_rating as study_ra9_0_ from faculties faculty0_ [42102-200]
+2021-04-12 14:04:50 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Таблица "FACULTIES" не найдена
+Table "FACULTIES" not found; SQL statement:
+select faculty0_.id as id1_0_, faculty0_.campus as campus2_0_, faculty0_.faculty_rating as faculty_3_0_, faculty0_.hostel_rating as hostel_r4_0_, faculty0_.information as informat5_0_, faculty0_.name as name6_0_, faculty0_.short_information as short_in7_0_, faculty0_.studentasset_rating as studenta8_0_, faculty0_.study_rating as study_ra9_0_ from faculties faculty0_ [42102-200]
