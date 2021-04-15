@@ -10,10 +10,10 @@ import javax.persistence.*;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
+@RequiredArgsConstructor
 @Table(name = "SPECIALTY")
 public class Specialty implements JsonIgnoreWraper{
     @Id
-    @NonNull
     private Long id;
 
 //    @ManyToOne(fetch = FetchType.LAZY,optional = false)
@@ -32,6 +32,21 @@ public class Specialty implements JsonIgnoreWraper{
     @NonNull
     private String information;
 
+//    @ManyToOne(fetch = FetchType.LAZY,optional = false)
+//    @JoinColumn(name = "FIRST_SUBJECT_ID")
+//    @NonNull
+//    private Subject firstSubjectId;
+//
+//    @ManyToOne(fetch = FetchType.LAZY)
+//    @JoinColumn(name = "SECOND_SUBJECT_ID")
+//    @NonNull
+//    private Subject secondSubjectId;
+//
+//    @ManyToOne(fetch = FetchType.LAZY)
+//    @JoinColumn(name = "THIRD_SUBJECT_ID")
+//    @NonNull
+//    private Subject thirdSubjectId;
+
     @Column(name = "FIRST_SUBJECT_ID")
     @NonNull
     private Long firstSubjectId;
@@ -47,6 +62,5 @@ public class Specialty implements JsonIgnoreWraper{
     @Column(name = "PASSING_SCORE")
     @NonNull
     private Integer passingScore;
-
 
 }

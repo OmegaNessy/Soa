@@ -10,4 +10,5 @@ import java.util.List;
 @Repository
 public interface FacultyRepository extends JpaRepository<Faculty,Long> {
     List<Faculty> findAllByNameStartingWith(String searchString);
+    Faculty findByName(String facultyName);
 }
