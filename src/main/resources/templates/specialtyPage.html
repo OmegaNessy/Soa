@@ -1,0 +1,55 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+    <title>Faculties</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}"/>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet"/>
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"/>
+</head>
+<body>
+<h1>Список специальностей</h1>
+<table border="1" style="width:300px">
+    <tr>
+        <td>Имя</td>
+        <td>Факультет</td>
+        <td>Информация</td>
+        <td>Проходной балл</td>
+        <td>Первый предмет</td>
+        <td>Второй предмет</td>
+        <td>Третий предмет</td>
+    </tr>
+    <th:block th:each="specialty : ${specialtyList}">
+        <tr>
+            <td th:text="${specialty.name}"/>
+            <td th:text="${specialty.facultyName}"/>
+            <td th:text="${specialty.information}"/>
+            <td th:text="${specialty.passingScore}"/>
+            <td th:text="${specialty.firstSubjectName}"/>
+            <td th:text="${specialty.secondSubjectName}"/>
+            <td th:text="${specialty.thirdSubjectName}"/>
+            <td><a  href="/admin/deleteSpecialty" th:href="@{'/admin/deleteSpecialty/' + ${specialty.id}}" class="btn btn-success">
+                <i class="fa fa-arrow-circle-o-left"></i>
+                &nbsp; Удалить
+            </a></td>
+            <td><a th:href="@{'/admin/specialty/add/'+${specialty.id}}" class="btn btn-success">
+                <i class="fa fa-arrow-circle-o-left"></i>
+                &nbsp; Редактировать специальность
+            </a></td>
+        </tr>
+    </th:block>
+
+</table>
+<h2>
+    <a href="/admin/main" class="btn btn-success">
+        <i class="fa fa-arrow-circle-o-left"></i>
+        &nbsp; Назад на главый экран
+    </a>
+    <a href="/admin/specialty/add" class="btn btn-success">
+        <i class="fa fa-arrow-circle-o-left"></i>
+        &nbsp; Добавить специальность
+    </a>
+</h2>
+</body>
+
+</html>

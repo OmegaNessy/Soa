@@ -1,0 +1,58 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+    <title>Answers</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}"/>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet"/>
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"/>
+</head>
+<body>
+<h1 th:text="${'Список товетов на вопрос: '+ question.question}"></h1>
+<table border="1" style="width:300px">
+    <tr>
+        <td>Id ответа</td>
+        <td>Ответ</td>
+        <td>Количество баллов</td>
+    </tr>
+    <th:block th:each="answer : ${answersList}">
+        <tr>
+            <td th:text="${answer.id}"/>
+            <td th:text="${answer.answerText}"/>
+            <td th:text="${answer.score}"/>
+            <td><a  th:href="@{'/admin/test/question/'+${question.id}+'/deleteAnswer/' + ${answer.id}}" class="btn btn-success">
+                <i class="fa fa-arrow-circle-o-left"></i>
+                &nbsp; Удалить
+            </a></td>
+            <td><a th:href="@{'/admin/test/question/answer/edit/' + ${answer.id}}" class="btn btn-success">
+                <i class="fa fa-arrow-circle-o-left"></i>
+                &nbsp; Редактировать
+            </a></td>
+        </tr>
+    </th:block>
+</table>
+<form action="/admin/test/question/answer/add" method="post">
+    <p>
+        <label>Ответ:</label>
+        <input type="text" name="answerText"/>
+    </p>
+    <p>
+        <label>Количество баллов:</label>
+        <input type="text" name="score"/>
+    </p>
+    <p>
+        <input type="hidden" name="questionId" th:value="${question.id}">
+    </p>
+    <p>
+        <input type="submit" value="Добавить ответ">
+    </p>
+
+</form>
+
+<a th:href="@{'/admin/test/'+${question.testId}+'/question'}" class="btn btn-success">
+    <i class="fa fa-arrow-circle-o-left"></i>
+    &nbsp; Назад к списку вопросов
+</a>
+</body>
+
+</html>

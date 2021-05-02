@@ -1,0 +1,65 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+    <title>Faculties</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}"/>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet"/>
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"/>
+</head>
+<body>
+<h1>Список тестов</h1>
+<table border="1" style="width:300px">
+    <tr>
+        <td>Номер теста</td>
+        <td>Тип теста</td>
+        <td>Факультет теста</td>
+    </tr>
+    <th:block th:each="test : ${testList}">
+        <tr>
+            <td th:text="${test.id}"/>
+            <td th:text="${test.testType}"/>
+            <td th:text="${test.facultyName}"/>
+            <td><a  th:href="@{'/admin/deleteTest/' + ${test.id}}" class="btn btn-success">
+                <i class="fa fa-arrow-circle-o-left"></i>
+                &nbsp; Удалить
+            </a></td>
+            <td><a th:href="@{'/admin/test/edit/' + ${test.id}}" class="btn btn-success">
+                <i class="fa fa-arrow-circle-o-left"></i>
+                &nbsp; Редактировать
+            </a></td>
+            <td><a th:href="@{'/admin/test/'+ ${test.id}+'/question/'}" class="btn btn-success">
+                <i class="fa fa-arrow-circle-o-right"></i>
+                &nbsp; Вопросы
+            </a></td>
+        </tr>
+    </th:block>
+
+</table>
+<form action="/admin/test/add" method="post">
+    <p>
+        <label>Тип теста:</label>
+        <input type="text" name="testType"/>
+    </p>
+
+    <p>
+        <label>Отношение к факультету (оставить пустым, если тест общий):</label>
+        <select name = "facultyName" >
+            <option value=""></option>
+            <option th:each="faculty : ${faculties}"
+                    th:value="${faculty.name}"
+                    th:text="${faculty.name}"></option>
+        </select>
+<!--        <input type="text" name="facultyName"/>-->
+    </p>
+    <p>
+        <input type="submit" value="Добавить тест">
+    </p>
+</form>
+<a href="/admin/main" class="btn btn-success">
+    <i class="fa fa-arrow-circle-o-left"></i>
+    &nbsp; Назад на главый экран
+</a>
+</body>
+
+</html>

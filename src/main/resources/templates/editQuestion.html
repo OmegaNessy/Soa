@@ -1,0 +1,33 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Edit Question</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}"/>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet"/>
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"/>
+</head>
+<body>
+<h1>Редактирование вопроса</h1>
+<form action="/admin/test/question/add" method="post">
+    <p>
+        <label>Тип вопроса:</label>
+        <input type="text" name="questionType" th:value="${question.questionType}"/>
+    </p>
+    <p>
+        <label>Вопрос:</label>
+        <input type="text" name="question" th:value="${question.question}"/>
+    </p>
+    <p>
+        <input type="hidden" name="id" th:value="${question.id}">
+    </p>
+    <p>
+        <input type="hidden" name="testId" th:value="${question.testId}">
+    </p>
+    <p>
+        <input type="submit" value="Обновить вопрос">
+    </p>
+</form>
+</body>
+
+</html>

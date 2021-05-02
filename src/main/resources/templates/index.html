@@ -1,0 +1,27 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Главная</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+</head>
+<body>
+<div>
+
+    <div sec:authorize="!isAuthenticated()">
+        <h4>Добро пожаловать, Гость</h4>
+        <h4><a href="/login">Войти</a></h4>
+    </div>
+    <div sec:authorize="isAuthenticated()">
+        <h3 th:text="${'Добро пожаловать, ' + #authentication.name}" />
+        <h4><a href="/logout">Выйти</a></h4>
+    </div>
+<!--    <h4><a href="/news">Новости (только пользователь)</a></h4>-->
+    <div sec:authorize="hasRole('ADMIN')">
+        <h4><a href="/admin/main">Админка (только админ)</a></h4>
+        <h4><a href="/registration">Зарегистрировать пользователя</a></h4>
+        <h4><a href="admin/users">Список пользователей</a></h4>
+        <h4><a href="/admin/test">Список тестов</a></h4>
+    </div>
+</div>
+</body>
+</html>
