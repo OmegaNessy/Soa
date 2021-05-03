@@ -2,10 +2,7 @@ package by.bntu.surveyofapplicants.soa.entity;
 
 import lombok.*;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
 @Data
@@ -16,7 +13,7 @@ import javax.persistence.Table;
 @Table(name = "FACULTIES")
 public class Faculty implements JsonIgnoreWraper {
     @Id
-    @NonNull
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(name = "NAME")

@@ -1,0 +1,17 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+    <title>Welcome</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}"/>
+</head>
+<body>
+<h1>Добро пожаловать на главную страницу администратора</h1>
+
+<a th:href="@{/admin/facultyList}">Faculty List</a>
+<a th:href="@{/admin/specialtyList}">Specialty List</a>
+<a th:href="@{/admin/test}">Test List</a>
+
+</body>
+
+</html>

@@ -1,0 +1,36 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Add test</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}"/>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet"/>
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"/>
+</head>
+<body>
+<h1>Редактирование Теста</h1>
+<form action="/admin/test/add" method="post">
+    <p>
+        <label>Тип теста:</label>
+        <input type="text" name="testType" th:value="${test.testType}"/>
+    </p>
+    <p>
+        <label>Отношение к факультету (оставить пустым, если тест общий):</label>
+        <select name = "facultyName" >
+            <option value=""></option>
+            <option th:each="faculty : ${faculties}"
+                    th:value="${faculty.name}"
+                    th:text="${faculty.name}"></option>
+        </select>
+        <!--        <input type="text" name="facultyName"/>-->
+    </p>
+    <p>
+        <input type="hidden" name="id" th:value="${test.id}">
+    </p>
+    <p>
+        <input type="submit" value="Обновить тест">
+    </p>
+</form>
+</body>
+
+</html>

@@ -11,6 +11,7 @@ import java.io.Serializable;
 @AllArgsConstructor
 @NoArgsConstructor
 public class SpecialtyDto implements Serializable {
+    private Long id;
     @NonNull
     private String name;
 

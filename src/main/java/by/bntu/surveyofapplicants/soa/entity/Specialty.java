@@ -14,6 +14,7 @@ import javax.persistence.*;
 @Table(name = "SPECIALTY")
 public class Specialty implements JsonIgnoreWraper{
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
 //    @ManyToOne(fetch = FetchType.LAZY,optional = false)

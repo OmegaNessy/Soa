@@ -1,0 +1,45 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Edit Answer</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}"/>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet"/>
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"/>
+</head>
+<body>
+<h1>Редактирование ответа</h1>
+<form action="/admin/test/question/answer/add" method="post">
+    <p>
+        <label>Ответ:</label>
+        <input type="text" name="answerText" th:value="${answer.answerText}"/>
+    </p>
+    <p>
+        <label>Количество баллов:</label>
+        <input type="text" name="score" th:value="${answer.score}"/>
+    </p>
+<!--    <p>-->
+<!--        <label>К какому факультету? :</label>-->
+<!--        <input type="text" name="membership" th:value="${answer.membership}"/>-->
+<!--    </p>-->
+    <p>
+        <label>К какому факультету?:</label>
+        <select name = "membership" >
+            <option th:each="faculty : ${faculties}"
+                    th:value="${faculty.name}"
+                    th:text="${faculty.name}"></option>
+        </select>
+    </p>
+    <p>
+        <input type="hidden" name="id" th:value="${answer.id}">
+    </p>
+    <p>
+        <input type="hidden" name="questionId" th:value="${answer.questionId}">
+    </p>
+    <p>
+        <input type="submit" value="Обновить ответ">
+    </p>
+</form>
+</body>
+
+</html>

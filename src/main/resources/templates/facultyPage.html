@@ -35,6 +35,10 @@
                 <i class="fa fa-arrow-circle-o-left"></i>
                 &nbsp; Удалить
             </a></td>
+            <td><a th:href="@{'/admin/faculty/edit/' + ${faculty.id}}" class="btn btn-success">
+                <i class="fa fa-arrow-circle-o-left"></i>
+                &nbsp; Редактировать
+            </a></td>
         </tr>
     </th:block>
 
@@ -42,6 +46,10 @@
 <a href="/admin/main" class="btn btn-success">
     <i class="fa fa-arrow-circle-o-left"></i>
     &nbsp; Назад на главый экран
+</a>
+<a th:href="@{'/admin/faculty/edit'}" class="btn btn-success">
+    <i class="fa fa-arrow-circle-o-left"></i>
+    &nbsp; Добавить факультет
 </a>
 </body>
 
