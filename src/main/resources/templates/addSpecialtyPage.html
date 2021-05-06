@@ -9,63 +9,123 @@
 </head>
 <body>
 <h1>Обновление списка специальностей</h1>
-<form action="/admin/specialty/add" method="post">
-    <p>
-        <input type="hidden" name="id" th:value="${specialty.id}"/>
-    </p>
-    <p>
-        <label>Имя:</label>
-        <input type="text" name="name" th:value="${specialty.name}"/>
-    </p>
-    <!--    <p>-->
-    <!--        <label>Название факультета:</label>-->
-    <!--        <input type="text" name="facultyName" th:value="${specialty.facultyName}"/>-->
-    <!--    </p>-->
-    <p>
-        <label>Название факультета:</label>
-        <select name="facultyName">
-            <option th:each="faculty : ${facultyList}"
-                    th:value="${faculty.name}"
-                    th:text="${faculty.name}"></option>
-        </select>
-    </p>
-    <p>
-        <label>Информация:</label>
-        <input type="text" name="information" th:value="${specialty.information}"/>
-    </p>
-    <p>
-        <label>Проходной балл:</label>
-        <input type="text" name="passingScore" th:value="${specialty.passingScore}"/>
-    </p>
+<form action="/admin/specialty/add" th:object="${specialty}" method="post">
+    <table>
+        <tr>
+            <td>Имя:</td>
+            <td><input type="text" name="name" th:value="${specialty.name}"/></td>
+            <td th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Name Error</td>
 
-    <p>
-        <label>Первый предмет:</label>
-        <select name="firstSubjectName">
-            <option th:each="subject : ${subjectList}"
-                    th:value="${subject.name}"
-                    th:text="${subject.name}"></option>
-        </select>
-    </p>
+        </tr>
+        <tr>
+            <td>Название факультета:</td>
+            <td><select name="facultyName">
+                <option th:each="faculty : ${facultyList}"
+                        th:value="${faculty.name}"
+                        th:text="${faculty.name}"></option>
+            </select></td>
+        </tr>
+        <tr>
+            <td>Информация:</td>
+            <td><input type="text" name="information" th:value="*{information}"/></td>
+            <td th:if="${#fields.hasErrors('information')}" th:errors="*{information}">Information Error</td>
 
-    <p>
-        <label>Второй предмет:</label>
-        <select name="secondSubjectName">
-            <option th:each="subject : ${subjectList}"
-                    th:value="${subject.name}"
-                    th:text="${subject.name}"></option>
-        </select>
-    </p>
-    <p>
-        <label>Третий предмет:</label>
-        <select name="thirdSubjectName">
-            <option th:each="subject : ${subjectList}"
-                    th:value="${subject.name}"
-                    th:text="${subject.name}"></option>
-        </select>
-    </p>
-    <p>
-        <input type="submit" value="Обновить">
-    </p>
+        </tr>
+        <tr>
+            <td>Проходной балл:</td>
+            <td><input type="text" name="passingScore" th:value="*{passingScore}"/></td>
+            <td th:if="${#fields.hasErrors('passingScore')}" th:errors="*{passingScore}">PassingScore Error</td>
+
+        </tr>
+        <tr>
+            <td>Первый предмет:</td>
+            <td><select name="firstSubjectName">
+                <option th:each="subject : ${subjectList}"
+                        th:value="${subject.name}"
+                        th:text="${subject.name}"></option>
+            </select></td>
+        </tr>
+        <tr>
+            <td>Второй предмет:</td>
+            <td><select name="secondSubjectName">
+                <option th:each="subject : ${subjectList}"
+                        th:value="${subject.name}"
+                        th:text="${subject.name}"></option>
+            </select></td>
+        </tr>
+        <tr>
+            <td>Третий предмет:</td>
+            <td><select name="thirdSubjectName">
+                <option th:each="subject : ${subjectList}"
+                        th:value="${subject.name}"
+                        th:text="${subject.name}"></option>
+            </select></td>
+        </tr>
+        <tr>
+            <td><input type="submit" value="Обновить" class="btn btn-success"></td>
+        </tr>
+        <tr>
+            <td><input type="hidden" name="id" th:value="${specialty.id}"></td>
+        </tr>
+        <tr>
+            <td><a  href="/admin/facultyList" class="btn btn-success">
+                <i class="fa fa-arrow-circle-o-left"></i>
+                &nbsp; Назад
+            </a></td>
+        </tr>
+    </table>
+<!--    <p>-->
+<!--        <input type="hidden" name="id" th:value="${specialty.id}"/>-->
+<!--    </p>-->
+<!--    <p>-->
+<!--        <label>Имя:</label>-->
+<!--        <input type="text" name="name" th:value="${specialty.name}"/>-->
+<!--    </p>-->
+<!--    <p>-->
+<!--        <label>Название факультета:</label>-->
+<!--        <select name="facultyName">-->
+<!--            <option th:each="faculty : ${facultyList}"-->
+<!--                    th:value="${faculty.name}"-->
+<!--                    th:text="${faculty.name}"></option>-->
+<!--        </select>-->
+<!--    </p>-->
+<!--    <p>-->
+<!--        <label>Информация:</label>-->
+<!--        <input type="text" name="information" th:value="${specialty.information}"/>-->
+<!--    </p>-->
+<!--    <p>-->
+<!--        <label>Проходной балл:</label>-->
+<!--        <input type="text" name="passingScore" th:value="${specialty.passingScore}"/>-->
+<!--    </p>-->
+
+<!--    <p>-->
+<!--        <label>Первый предмет:</label>-->
+<!--        <select name="firstSubjectName">-->
+<!--            <option th:each="subject : ${subjectList}"-->
+<!--                    th:value="${subject.name}"-->
+<!--                    th:text="${subject.name}"></option>-->
+<!--        </select>-->
+<!--    </p>-->
+
+<!--    <p>-->
+<!--        <label>Второй предмет:</label>-->
+<!--        <select name="secondSubjectName">-->
+<!--            <option th:each="subject : ${subjectList}"-->
+<!--                    th:value="${subject.name}"-->
+<!--                    th:text="${subject.name}"></option>-->
+<!--        </select>-->
+<!--    </p>-->
+<!--    <p>-->
+<!--        <label>Третий предмет:</label>-->
+<!--        <select name="thirdSubjectName">-->
+<!--            <option th:each="subject : ${subjectList}"-->
+<!--                    th:value="${subject.name}"-->
+<!--                    th:text="${subject.name}"></option>-->
+<!--        </select>-->
+<!--    </p>-->
+<!--    <p>-->
+<!--        <input type="submit" value="Обновить">-->
+<!--    </p>-->
 </form>
 </body>
 

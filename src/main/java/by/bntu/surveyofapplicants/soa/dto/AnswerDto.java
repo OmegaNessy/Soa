@@ -5,6 +5,9 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.NonNull;
 
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.io.Serializable;
 
 @Data
@@ -14,9 +17,10 @@ public class AnswerDto implements Serializable {
     private Long id;
     private Long questionId;
     @NonNull
+    @Size(min = 2, max = 40,message = "Вопрос не может быть пустым")
     private String answerText;
-    @NonNull
+    @NotNull(message = "Не может быть пустым")
     private Integer score;
-    @NonNull
+    @NotEmpty(message = "Не может быть пустым")
     private String membership;
 }

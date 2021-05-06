@@ -35,26 +35,29 @@
         </tr>
     </th:block>
 </table>
-<form action="/admin/test/question/add" method="post">
-    <p>
-        <label>Тип вопроса:</label>
-        <select name = "questionType" >
-            <option th:each="question : ${questionTypes}"
-                    th:value="${question.value}"
-                    th:text="${question.value}"></option>
-        </select>
-    </p>
-    <p>
-        <label>Вопрос:</label>
-        <input type="text" name="question"/>
-    </p>
-    <p>
-        <input type="hidden" name="testId" th:value="${test.id}">
-    </p>
-    <p>
-        <input type="submit" value="Добавить вопрос">
-    </p>
+<form action="/admin/test/question/add" th:object="${question}" method="post">
+    <table>
+        <tr><td>Тип вопроса:</td>
+            <td><select name = "questionType" >
+                <option th:each="question : ${questionTypes}"
+                        th:value="${question.value}"
+                        th:text="${question.value}"></option>
+            </select></td></tr>
+        <tr>
+            <td>Вопрос:</td>
+            <td><input type="text" name="question"/></td>
+            <td th:if="${#fields.hasErrors('question')}" th:errors="*{question}">Question Error</td>
+        </tr>
+        <tr>
+            <td><input type="hidden" name="testId" th:value="${test.id}"></td>
+        </tr>
+        <tr>
+            <td>
+                <input type="submit" value="Добавить вопрос" class="btn btn-success">
+            </td>
+        </tr>
 
+    </table>
 </form>
 
 <a th:href="@{/admin/test/}" class="btn btn-success">

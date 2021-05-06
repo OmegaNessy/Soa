@@ -12,7 +12,7 @@
 <table border="1" style="width:300px">
     <tr>
         <td>Номер теста</td>
-        <td>Тип теста</td>
+        <td>Название теста</td>
         <td>Факультет теста</td>
     </tr>
     <th:block th:each="test : ${testList}">
@@ -36,25 +36,29 @@
     </th:block>
 
 </table>
-<form action="/admin/test/add" method="post">
-    <p>
-        <label>Тип теста:</label>
-        <input type="text" name="testType"/>
-    </p>
-
-    <p>
-        <label>Отношение к факультету (оставить пустым, если тест общий):</label>
-        <select name = "facultyName" >
-            <option value=""></option>
-            <option th:each="faculty : ${faculties}"
-                    th:value="${faculty.name}"
-                    th:text="${faculty.name}"></option>
-        </select>
-<!--        <input type="text" name="facultyName"/>-->
-    </p>
-    <p>
-        <input type="submit" value="Добавить тест">
-    </p>
+<form action="/admin/test/add" th:object="${test}" method="post">
+    <table>
+        <tr>
+            <td>Название теста:</td>
+            <td><input type="text" name="testType" /></td>
+            <td th:if="${#fields.hasErrors('testType')}" th:errors="*{testType}">TestType Error</td>
+            <td th:if="${errorMessage}"  th:text="${errorMessage}">Error</td>
+        </tr>
+        <tr>
+            <td>Отношение к факультету (оставить пустым, если тест общий):</td>
+            <td><select name = "facultyName" >
+                <option value=""></option>
+                <option th:each="faculty : ${faculties}"
+                        th:value="${faculty.name}"
+                        th:text="${faculty.name}"></option>
+            </select></td>
+        </tr>
+        <tr>
+            <td>
+                <input type="submit" value="Добавить тест" class="btn btn-success">
+            </td>
+        </tr>
+    </table>
 </form>
 <a href="/admin/main" class="btn btn-success">
     <i class="fa fa-arrow-circle-o-left"></i>

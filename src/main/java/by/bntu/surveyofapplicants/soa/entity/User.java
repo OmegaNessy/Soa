@@ -24,8 +24,6 @@ public class User implements UserDetails {
 
     @Column(name = "login")
     @NonNull
-    @Size(min = 6, max = 25, message = "Длинна от 6 до 25 символов. Запрещены специальные символы.")
-    @Pattern(regexp = "^(?=\\S+$).{8,}$")
     private String login;
 
     @ManyToMany(fetch = FetchType.EAGER)
@@ -33,8 +31,6 @@ public class User implements UserDetails {
 
     @Column(name = "password")
     @NonNull
-    @Size(min = 8, max = 25, message = "Длинна от 8 до 25 символов. Обязательна 1 цифра и 1 строчная буква. Запрещены специальные символы.")
-    @Pattern(regexp = "^(?=.*[0-9])(?=.*[A-Z])(?=\\S+$).{8,}$")
     private String password;
 
     @Transient

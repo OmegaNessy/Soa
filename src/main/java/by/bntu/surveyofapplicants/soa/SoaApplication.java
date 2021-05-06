@@ -1,5 +1,7 @@
 package by.bntu.surveyofapplicants.soa;
 
+import org.modelmapper.AbstractConverter;
+import org.modelmapper.Converter;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.convention.MatchingStrategies;
 import org.springframework.boot.SpringApplication;
@@ -18,11 +20,28 @@ public class SoaApplication {
 	@Bean
 	public ModelMapper modelMapper() {
 		ModelMapper mapper = new ModelMapper();
+
+
+		Converter<String, Float> toStringFloat = new AbstractConverter<String, Float>() {
+			@Override
+			protected Float convert(String source) {
+				return Float.valueOf(source);
+			}
+		};
+		Converter<Float,String> toFloatString = new AbstractConverter<Float, String>() {
+			@Override
+			protected String convert(Float aFloat) {
+				return String.valueOf(aFloat);
+			}
+		};
 		mapper.getConfiguration()
 				.setMatchingStrategy(MatchingStrategies.STRICT)
 				.setFieldMatchingEnabled(true)
 				.setSkipNullEnabled(true)
 				.setFieldAccessLevel(PRIVATE);
+		mapper.createTypeMap(Object.class,Object.class);
+		mapper.addConverter(toStringFloat);
+		mapper.addConverter(toFloatString);
 		return mapper;
 	}
 }

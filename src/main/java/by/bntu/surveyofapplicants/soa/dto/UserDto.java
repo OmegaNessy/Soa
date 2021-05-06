@@ -11,27 +11,18 @@ import java.util.Set;
 public class UserDto {
     private Long id;
 
-    @NotBlank(message = "Login cant be empty")
-    @NotEmpty(message = "Login cant be empty")
+    @NotEmpty(message = "Логин не может быть пустым")
     private String login;
 
     private Set<Role> roles;
 
-    @Size(min = 8, max = 25, message = "Длинна от 8 до 25 символов. Обязательна 1 цифра и 1 строчная буква. Запрещены специальные символы.")
-    @Pattern(regexp = "^(?=.*[0-9])(?=.*[A-Z])(?=\\S+$).{8,}$")
+//    @Size(min = 8, max = 25, message = "Длинна от 8 до 25 символов. Обязательна 1 цифра и 1 строчная буква.")
+    @Pattern(regexp = "^(?=.*[0-9])(?=.*[A-Z])(?=\\S+$).{8,25}$",message = "Длинна от 8 до 25 символов. Обязательна 1 цифра и 1 строчная буква.")
     private String password;
 
     private String confirmedPassword;
 
     public UserDto() {
-    }
-
-    public UserDto(Long id, @NotBlank(message = "Login cant be empty") @NotEmpty(message = "Login cant be empty") String login, Set<Role> roles, @Size(min = 8, max = 25, message = "Длинна от 8 до 25 символов. Обязательна 1 цифра и 1 строчная буква. Запрещены специальные символы.") @Pattern(regexp = "^(?=.*[0-9])(?=.*[A-Z])(?=\\S+$).{8,}$") String password, String confirmedPassword) {
-        this.id = id;
-        this.login = login;
-        this.roles = roles;
-        this.password = password;
-        this.confirmedPassword = confirmedPassword;
     }
 
     public Long getId() {

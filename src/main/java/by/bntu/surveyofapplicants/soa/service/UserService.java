@@ -51,7 +51,7 @@ public class UserService implements UserDetailsService {
         return userRepository.findAll();
     }
 
-    public boolean saveUser(@Valid UserDto user) {
+    public boolean saveUser(UserDto user) {
         User userFromForm = mapper.toEntity(user);
         User userFromDB = userRepository.findByLogin(userFromForm.getUsername());
 

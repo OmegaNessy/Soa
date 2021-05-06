@@ -5,6 +5,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.NonNull;
 
+import javax.validation.constraints.Size;
 import java.io.Serializable;
 
 @Data
@@ -13,6 +14,7 @@ import java.io.Serializable;
 public class TestDto implements Serializable {
     private Long id;
     @NonNull
+    @Size(min = 4, max = 100, message = "Поле от 4 до 100 символов")
     private String testType;
 
     private String facultyName;

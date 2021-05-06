@@ -14,7 +14,7 @@
         <td>Id ответа</td>
         <td>Ответ</td>
         <td>Количество баллов</td>
-        <td>Какому факультету?</td>
+        <td>К чему относится?</td>
     </tr>
     <th:block th:each="answer : ${answersList}">
         <tr>
@@ -33,34 +33,30 @@
         </tr>
     </th:block>
 </table>
-<form action="/admin/test/question/answer/add" method="post">
-    <p>
-        <label>Ответ:</label>
-        <input type="text" name="answerText"/>
-    </p>
-    <p>
-        <label>Количество баллов:</label>
-        <input type="text" name="score"/>
-    </p>
-<!--    <p>-->
-<!--        <label>К какому факультету?:</label>-->
-<!--        <input type="text" name="membership"/>-->
-<!--    </p>-->
-    <p>
-        <label>К какому факультету?:</label>
-        <select name = "membership" >
-            <option th:each="faculty : ${faculties}"
-                    th:value="${faculty.name}"
-                    th:text="${faculty.name}"></option>
-        </select>
-    </p>
-    <p>
-        <input type="hidden" name="questionId" th:value="${question.id}">
-    </p>
-    <p>
-        <input type="submit" value="Добавить ответ">
-    </p>
-
+<form action="/admin/test/question/answer/add" th:object="${answer}" method="post">
+    <table>
+        <tr>
+            <td>Ответ:</td>
+            <td><input type="text" name="answerText"/></td>
+            <td th:if="${#fields.hasErrors('answerText')}" th:errors="*{answerText}">AnswerText Error</td>
+        </tr>
+        <tr>
+            <td>Количество баллов:</td>
+            <td><input type="text" name="score"/></td>
+            <td th:if="${#fields.hasErrors('score')}" th:errors="*{score}">Score Error</td>
+        </tr>
+        <tr>
+            <td>К чему относится?:</td>
+            <td><input type="text" name = "membership"/></td>
+            <td th:if="${#fields.hasErrors('membership')}" th:errors="*{membership}">Membership Error</td>
+        </tr>
+        <tr>
+            <td><input type="hidden" name="questionId" th:value="${question.id}"></td>
+        </tr>
+        <tr>
+            <td><input type="submit" value="Добавить ответ" class="btn btn-success"></td>
+        </tr>
+    </table>
 </form>
 
 <a th:href="@{'/admin/test/'+${question.testId}+'/question'}" class="btn btn-success">

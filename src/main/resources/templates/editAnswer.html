@@ -9,36 +9,68 @@
 </head>
 <body>
 <h1>Редактирование ответа</h1>
-<form action="/admin/test/question/answer/add" method="post">
-    <p>
-        <label>Ответ:</label>
-        <input type="text" name="answerText" th:value="${answer.answerText}"/>
-    </p>
-    <p>
-        <label>Количество баллов:</label>
-        <input type="text" name="score" th:value="${answer.score}"/>
-    </p>
+<form action="/admin/test/question/answer/edit" th:object="${answer}" method="post">
+    <table>
+        <tr>
+            <td>Ответ:</td>
+            <td><input type="text" name="answerText" th:value="*{answerText}"/></td>
+            <td th:if="${#fields.hasErrors('answerText')}" th:errors="*{answerText}">AnswerText Error</td>
+        </tr>
+        <tr>
+            <td>Количество баллов:</td>
+            <td><input type="text" name="score" th:value="*{score}"/></td>
+            <td th:if="${#fields.hasErrors('score')}" th:errors="*{score}">Score Error</td>
+        </tr>
+        <tr>
+            <td>К чему относиться?:</td>
+            <td><input type="text" name="membership" th:value="*{membership}"></td>
+            <td th:if="${#fields.hasErrors('membership')}" th:errors="*{membership}">Membership Error</td>
+        </tr>
+        <tr>
+            <td><input type="hidden" name="id" th:value="${answer.id}"></td>
+        </tr>
+        <tr>
+            <td>
+                <input type="hidden" name="questionId" th:value="${answer.questionId}">
+            </td>
+        </tr>
+        <tr>
+            <td><input type="submit" value="Обновить ответ" class="btn btn-success"></td>
+        </tr>
+        <tr>
+            <td>
+                <a th:href="@{'/admin/test/question/'+${answer.questionId}+'/answer'}" class="btn btn-success">
+                    <i class="fa fa-arrow-circle-o-left"></i>
+                    Назад
+                </a>
+            </td>
+        </tr>
+    </table>
 <!--    <p>-->
-<!--        <label>К какому факультету? :</label>-->
-<!--        <input type="text" name="membership" th:value="${answer.membership}"/>-->
+<!--        <label>Ответ:</label>-->
+<!--        <input type="text" name="answerText" th:value="${answer.answerText}"/>-->
 <!--    </p>-->
-    <p>
-        <label>К какому факультету?:</label>
-        <select name = "membership" >
-            <option th:each="faculty : ${faculties}"
-                    th:value="${faculty.name}"
-                    th:text="${faculty.name}"></option>
-        </select>
-    </p>
-    <p>
-        <input type="hidden" name="id" th:value="${answer.id}">
-    </p>
-    <p>
-        <input type="hidden" name="questionId" th:value="${answer.questionId}">
-    </p>
-    <p>
-        <input type="submit" value="Обновить ответ">
-    </p>
+<!--    <p>-->
+<!--        <label>Количество баллов:</label>-->
+<!--        <input type="text" name="score" th:value="${answer.score}"/>-->
+<!--    </p>-->
+<!--    <p>-->
+<!--        <label>К какому факультету?:</label>-->
+<!--        <select name = "membership" >-->
+<!--            <option th:each="faculty : ${faculties}"-->
+<!--                    th:value="${faculty.name}"-->
+<!--                    th:text="${faculty.name}"></option>-->
+<!--        </select>-->
+<!--    </p>-->
+<!--    <p>-->
+<!--        <input type="hidden" name="id" th:value="${answer.id}">-->
+<!--    </p>-->
+<!--    <p>-->
+<!--        <input type="hidden" name="questionId" th:value="${answer.questionId}">-->
+<!--    </p>-->
+<!--    <p>-->
+<!--        <input type="submit" value="Обновить ответ" class="btn btn-success">-->
+<!--    </p>-->
 </form>
 </body>
 

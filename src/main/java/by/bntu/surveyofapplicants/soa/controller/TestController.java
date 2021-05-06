@@ -1,17 +1,21 @@
 package by.bntu.surveyofapplicants.soa.controller;
 
+import by.bntu.surveyofapplicants.soa.dto.MobileDto;
+import by.bntu.surveyofapplicants.soa.dto.ResultDto;
 import by.bntu.surveyofapplicants.soa.entity.Test;
 import by.bntu.surveyofapplicants.soa.repository.TestRepository;
+import by.bntu.surveyofapplicants.soa.service.TestService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@RestController("/test")
+@RestController
 public class TestController {
     static final String GENERAL_TEST_NAME = "Общий";
+
+    @Autowired
+    TestService service;
 
     @Autowired
     TestRepository repository;
@@ -30,4 +34,10 @@ public class TestController {
     public List<Test> getAllTests(){
         return repository.findAll();
     }
+
+//    @PostMapping("/test/result/add")
+//    public ResultDto addTestResult(@RequestBody MobileDto dto){
+//        service.saveTestResult(dto);
+//        return result;
+//    }
 }

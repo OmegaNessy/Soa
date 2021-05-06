@@ -9,8 +9,6 @@ import javax.persistence.Table;
 
 @Entity
 @Data
-@Getter
-@Setter
 @AllArgsConstructor
 @NoArgsConstructor
 @Table(name = "TEST_RESULT")
@@ -29,5 +27,5 @@ public class TestResult implements JsonIgnoreWraper{
 
     @Column(name = "RESULT")
     @NonNull
-    private Float score;
+    private String score;
 }

@@ -4,9 +4,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.NonNull;
-import javax.persistence.Id;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
 
 @Data
 @AllArgsConstructor
@@ -15,34 +14,34 @@ public class FacultyDto {
     private Long id;
 
     @NonNull
-    @NotBlank
+    @Size(min = 2, max = 4, message = "Должно содержать от 2 до 4 символов")
     private String name;
 
     @NonNull
-    @NotBlank
-    private Float hostelRating;
+    @Pattern(regexp = "([0-4]{1}\\.[0-9]?)|[5]\\.[0]|[5]", message = "Должно соответствовать формату Ч.Ч. Не больше 5")
+    private String hostelRating;
 
     @NonNull
-    @NotBlank
-    private Float studyRating;
+    @Pattern(regexp = "([0-4]{1}\\.[0-9]?)|[5]\\.[0]|[5]", message = "Должно соответствовать формату Ч.Ч. Не больше 5" )
+    private String studyRating;
 
     @NonNull
-    @NotBlank
-    private Float studentAssetRating;
+    @Pattern(regexp = "([0-4]{1}\\.[0-9]?)|[5]\\.[0]|[5]", message = "Должно соответствовать формату Ч.Ч. Не больше 5" )
+    private String studentAssetRating;
 
     @NonNull
-    @NotBlank
-    private Float facultyRating;
+    @Pattern(regexp = "([0-4]{1}\\.[0-9]?)|[5]\\.[0]|[5]", message = "Должно соответствовать формату Ч.Ч. Не больше 5" )
+    private String facultyRating;
 
     @NonNull
-    @NotBlank
+    @Size(min = 1, max = 3, message = "Поле обязательно должно быть заполнено")
     private String campus;
 
     @NonNull
-    @NotBlank
+    @Size(min = 50, max = 2048, message = "Должно содержать от 50 до 2048 символов")
     private String information;
 
     @NonNull
-    @NotBlank
+    @Size(min = 10, max = 50, message = "Должно содержать от 10 до 50 символов")
     private String shortInformation;
 }

@@ -7,26 +7,30 @@
 
 <body>
 <div>
-    <form th:action="@{/registration}" method="post">
+    <form th:action="@{/registration}" th:object="${userForm}" method="post">
+
 <!--    <form method="POST" th:modelAttribute="userForm">-->
         <h2>Регистрация</h2>
         <div>
             <label>Login</label>
             <label>
-                <input type="text" th:field="*{userForm.login}">
+                <input type="text" th:field="*{login}">
             </label>
+            <span th:if="${#fields.hasErrors('login')}"  th:errors="*{login}">Error</span>
             <span th:if="${usernameError}"  th:text="${usernameError}">Error</span>
+
         </div>
         <div>
             <label>Password</label>
             <label>
-                <input type="text" th:field="*{userForm.password}">
+                <input type="text" th:field="*{password}">
             </label>
+            <span th:if="${#fields.hasErrors('password')}"  th:errors="*{password}">Error</span>
         </div>
         <div>
             <label>PasswordConfirm</label>
             <label>
-                <input type="text" th:field="*{userForm.confirmedPassword}">
+                <input type="text" th:field="*{confirmedPassword}">
             </label>
             <span th:if="${passwordError}"  th:text="${passwordError}">Error</span>
         </div>

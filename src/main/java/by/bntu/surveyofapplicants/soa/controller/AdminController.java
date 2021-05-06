@@ -11,9 +11,11 @@ import by.bntu.surveyofapplicants.soa.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.List;
 
 @Controller
 @RequestMapping("/admin")
@@ -52,12 +54,6 @@ public class AdminController {
         return "facultyPage";
     }
 
-    @GetMapping("/specialtyList")
-    public String getAllSpecialties(Model model){
-        model.addAttribute("specialtyList",specialtyService.getAll());
-        return "specialtyPage";
-    }
-
     @GetMapping("/deleteFaculty/{id}")
     public String deleteFaculty(@PathVariable Long id, Model model) {
         facultyRepository.deleteById(id);
@@ -76,13 +72,22 @@ public class AdminController {
     }
 
     @PostMapping("/faculty/edit")
-    public String addFaculty(@Valid FacultyDto dto){
+    public String addFaculty(@ModelAttribute("faculty") @Valid FacultyDto dto, BindingResult result){
+        if (result.hasErrors()){
+            return "editFaculty";
+        }
         facultyService.saveFaculty(dto);
         return "redirect:/admin/facultyList";
     }
 
+    @GetMapping("/specialtyList")
+    public String getAllSpecialties(Model model){
+        model.addAttribute("specialtyList",specialtyService.getAll());
+        return "specialtyPage";
+    }
+
     @GetMapping("/deleteSpecialty/{id}")
-    public String deleteSpecialty(@PathVariable String id, Model model) {
+    public String deleteSpecialty(@PathVariable String id) {
         specialtyRepository.deleteById(Long.valueOf(id));
         return "redirect:/admin/specialtyList";
     }
@@ -100,12 +105,16 @@ public class AdminController {
         model.addAttribute("specialty",specialtyService.getSpecialtyById(id));
         model.addAttribute("facultyList",facultyService.getAllFaculties());
         model.addAttribute("subjectList",subjectService.getAllSubjects());
-
         return "addSpecialtyPage";
     }
 
     @PostMapping("/specialty/add")
-    public String addSpecialty(@ModelAttribute SpecialtyDto specialtyDto){
+    public String addSpecialty(@ModelAttribute("specialty") @Valid SpecialtyDto specialtyDto, BindingResult result, Model model){
+        if(result.hasErrors()){
+            model.addAttribute("facultyList",facultyService.getAllFaculties());
+            model.addAttribute("subjectList",subjectService.getAllSubjects());
+            return "addSpecialtyPage";
+        }
         specialtyService.addSpecialty(specialtyDto);
         return "redirect:/admin/specialtyList";
     }
@@ -128,8 +137,8 @@ public class AdminController {
 
     @GetMapping("/test")
     public String getTestList(Model model){
+        model.addAttribute("test", new TestDto());
         model.addAttribute("testList", testService.getAllTests());
-        model.addAttribute("emptyTest", TestDto.class);
         model.addAttribute("faculties", facultyService.getAllFaculties());
         return "testsList";
     }
@@ -141,10 +150,37 @@ public class AdminController {
     }
 
     @PostMapping("/test/add")
-    public String addTest(@ModelAttribute TestDto testDto){
-        testService.saveTest(testDto);
+    public String addTest(@ModelAttribute("test") @Valid TestDto testDto, BindingResult result,Model model){
+        if(result.hasErrors()){
+            model.addAttribute("testList", testService.getAllTests());
+            model.addAttribute("faculties", facultyService.getAllFaculties());
+            return "testsList";
+        }
+        if(!testService.saveTest(testDto)){
+            model.addAttribute("errorMessage", "Общий тест уже присутствует");
+            model.addAttribute("testList", testService.getAllTests());
+            model.addAttribute("faculties", facultyService.getAllFaculties());
+            return "testsList";
+        }
         return "redirect:/admin/test";
     }
+
+    @PostMapping("/test/edit")
+    public String editTest(@ModelAttribute("test") @Valid TestDto testDto, BindingResult result,Model model){
+        if(result.hasErrors()){
+            model.addAttribute("testList", testService.getAllTests());
+            model.addAttribute("faculties", facultyService.getAllFaculties());
+            return "editTest";
+        }
+        if(!testService.saveTest(testDto)){
+            model.addAttribute("errorMessage", "Общий тест уже присутствует");
+            model.addAttribute("testList", testService.getAllTests());
+            model.addAttribute("faculties", facultyService.getAllFaculties());
+            return "editTest";
+        }
+        return "redirect:/admin/test";
+    }
+
     @GetMapping("/test/edit/{id}")
     public String editTest(@PathVariable Long id, Model model){
         model.addAttribute("test",testService.getTestById(id));
@@ -156,12 +192,31 @@ public class AdminController {
     public String getQuestionList(@PathVariable Long id, Model model){
         model.addAttribute("questionList", questionService.getAllQuestionsByTestId(id));
         model.addAttribute("test",testService.getTestById(id));
+        model.addAttribute("question",new QuestionDto());
         model.addAttribute("questionTypes",questionTypeService.getAllQuestionTypes());
         return "questionsList";
     }
 
     @PostMapping("/test/question/add")
-    public String addTest(@ModelAttribute QuestionDto dto) {
+    public String addTest(@ModelAttribute("question") @Valid QuestionDto dto, BindingResult result, Model model) {
+        if(result.hasErrors()){
+            model.addAttribute("questionList", questionService.getAllQuestionsByTestId(dto.getTestId()));
+            model.addAttribute("test",testService.getTestById(dto.getTestId()));
+            model.addAttribute("questionTypes",questionTypeService.getAllQuestionTypes());
+            return "questionsList";
+        }
+        questionService.saveQuestion(dto);
+        return "redirect:/admin/test/"+dto.getTestId()+"/question";
+    }
+
+    @PostMapping("/test/question/edit")
+    public String editTest(@ModelAttribute("question") @Valid QuestionDto dto, BindingResult result, Model model) {
+        if(result.hasErrors()){
+            model.addAttribute("questionList", questionService.getAllQuestionsByTestId(dto.getTestId()));
+            model.addAttribute("test",testService.getTestById(dto.getTestId()));
+            model.addAttribute("questionTypes",questionTypeService.getAllQuestionTypes());
+            return "editQuestion";
+        }
         questionService.saveQuestion(dto);
         return "redirect:/admin/test/"+dto.getTestId()+"/question";
     }
@@ -183,11 +238,29 @@ public class AdminController {
     public String getAnswerList(@PathVariable Long id, Model model){
         model.addAttribute("answersList", answerService.getAllAnswersByQuestionId(id) );
         model.addAttribute("question",questionService.getQuestionById(id));
+        model.addAttribute("answer",new AnswerDto());
         model.addAttribute("faculties",facultyService.getAllFaculties());
         return "answersList";
     }
     @PostMapping("/test/question/answer/add")
-    public String addAnswer(@ModelAttribute AnswerDto dto) {
+    public String addAnswer(@ModelAttribute("answer") @Valid AnswerDto dto, BindingResult result, Model model) {
+        if(result.hasErrors()){
+            model.addAttribute("answersList", answerService.getAllAnswersByQuestionId(dto.getQuestionId()) );
+            model.addAttribute("question",questionService.getQuestionById(dto.getQuestionId()));
+            model.addAttribute("faculties",facultyService.getAllFaculties());
+            return "answersList";
+        }
+        answerService.saveAnswer(dto);
+        return "redirect:/admin/test/question/"+dto.getQuestionId()+"/answer";
+    }
+    @PostMapping("/test/question/answer/edit")
+    public String editAnswer(@ModelAttribute("answer") @Valid AnswerDto dto, BindingResult result, Model model) {
+        if(result.hasErrors()){
+            model.addAttribute("answersList", answerService.getAllAnswersByQuestionId(dto.getQuestionId()) );
+            model.addAttribute("question",questionService.getQuestionById(dto.getQuestionId()));
+            model.addAttribute("faculties",facultyService.getAllFaculties());
+            return "editAnswer";
+        }
         answerService.saveAnswer(dto);
         return "redirect:/admin/test/question/"+dto.getQuestionId()+"/answer";
     }
