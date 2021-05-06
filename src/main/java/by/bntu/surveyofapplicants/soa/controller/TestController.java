@@ -35,9 +35,8 @@ public class TestController {
         return repository.findAll();
     }
 
-//    @PostMapping("/test/result/add")
-//    public ResultDto addTestResult(@RequestBody MobileDto dto){
-//        service.saveTestResult(dto);
-//        return result;
-//    }
+    @PostMapping("/test/result/add")
+    public ResultDto addTestResult(@RequestBody MobileDto dto){
+        return service.saveTestResult(dto);
+    }
 }

@@ -1,10 +1,20 @@
 {
-  "testId": "id",
+  "testId": 33,
   "answersIds": [
-    1,4,5,3,2,2
+    26,
+    27,
+    30,
+    33,
+    32,
+    47,
+    36,
+    42,
+    45
   ],
-  "name": "name",
-  "surname": "surname",
-  "city": "city",
-  "telephone": "telephone without +"
+  "student": {
+    "name": "Андрей",
+    "surname": "Ковалихин",
+    "city": "Витебск",
+    "telephone": "375336976140"
+  }
 }

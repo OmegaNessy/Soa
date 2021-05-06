@@ -2,19 +2,20 @@ package by.bntu.surveyofapplicants.soa.entity;
 
 import lombok.*;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
+
 
 @Entity
 @Data
+@Getter
+@Setter
 @AllArgsConstructor
 @NoArgsConstructor
+@RequiredArgsConstructor
 @Table(name = "TEST_RESULT")
 public class TestResult implements JsonIgnoreWraper{
     @Id
-    @NonNull
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(name = "TEST_ID")
@@ -22,10 +23,15 @@ public class TestResult implements JsonIgnoreWraper{
     private Long testId;
 
     @Column(name = "STUDENT_ID")
-    @NonNull
     private Long studentId;
 
     @Column(name = "RESULT")
     @NonNull
     private String score;
+
+    public TestResult(Long testId, Long studentId, String score){
+        this.testId = testId;
+        this.studentId = studentId;
+        this.score = score;
+    }
 }

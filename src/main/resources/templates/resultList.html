@@ -1,0 +1,40 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+    <title>Test Results</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}"/>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet"/>
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"/>
+</head>
+<body>
+<h1>Список результатов анкетирования</h1>
+<table border="1" style="width:300px">
+    <tr>
+        <td>Номер теста</td>
+        <td>Название теста</td>
+        <td>Результат</td>
+        <td>Имя студента</td>
+        <td>Фамилия студента</td>
+        <td>Город студента</td>
+        <td>Телефон студента</td>
+    </tr>
+    <th:block th:each="result: ${results}">
+        <tr>
+            <td th:text="${result.id}"/>
+            <td th:text="${tests.get(result.testId)}"/>
+            <td th:text="${result.score}"/>
+            <td th:if="${students.get(result.studentId)!=null}" th:text="${students.get(result.studentId).getName()}"/>
+            <td th:if="${students.get(result.studentId)!=null}" th:text="${students.get(result.studentId).getSurname()}"/>
+            <td th:if="${students.get(result.studentId)!=null}" th:text="${students.get(result.studentId).getCity()}"/>
+            <td th:if="${students.get(result.studentId)!=null}" th:text="${students.get(result.studentId).getTelephone()}"/>
+        </tr>
+    </th:block>
+</table>
+<a href="/" class="btn btn-success">
+    <i class="fa fa-arrow-circle-o-left"></i>
+    &nbsp; Назад на главый экран
+</a>
+</body>
+
+</html>

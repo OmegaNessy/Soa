@@ -1,6 +1,7 @@
 package by.bntu.surveyofapplicants.soa.entity;
 
 import lombok.*;
+import org.springframework.stereotype.Component;
 
 import javax.persistence.*;
 import java.util.List;
@@ -10,23 +11,20 @@ import java.util.List;
 @Getter
 @Setter
 @AllArgsConstructor
-@NoArgsConstructor
+@RequiredArgsConstructor
 @Table(name = "STUDENT")
 public class Student implements JsonIgnoreWraper{
     @Id
-    @NonNull
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(name = "NAME")
-    @NonNull
     private String name;
 
     @Column(name = "SURNAME")
-    @NonNull
     private String surname;
 
     @Column(name = "CITY")
-    @NonNull
     private String city;
 
     @Column(name = "TELEPHONE")

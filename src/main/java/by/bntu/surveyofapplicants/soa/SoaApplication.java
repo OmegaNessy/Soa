@@ -1,5 +1,7 @@
 package by.bntu.surveyofapplicants.soa;
 
+import by.bntu.surveyofapplicants.soa.dto.ResultDto;
+import by.bntu.surveyofapplicants.soa.entity.TestResult;
 import org.modelmapper.AbstractConverter;
 import org.modelmapper.Converter;
 import org.modelmapper.ModelMapper;
@@ -42,6 +44,7 @@ public class SoaApplication {
 		mapper.createTypeMap(Object.class,Object.class);
 		mapper.addConverter(toStringFloat);
 		mapper.addConverter(toFloatString);
+		mapper.createTypeMap(TestResult.class, ResultDto.class);
 		return mapper;
 	}
 }
