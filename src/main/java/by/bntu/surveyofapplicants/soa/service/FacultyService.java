@@ -1,11 +1,7 @@
 package by.bntu.surveyofapplicants.soa.service;
 
 import by.bntu.surveyofapplicants.soa.dto.FacultyDto;
-import by.bntu.surveyofapplicants.soa.dto.UserDto;
 import by.bntu.surveyofapplicants.soa.entity.Faculty;
-import by.bntu.surveyofapplicants.soa.entity.IdentityCheckable;
-import by.bntu.surveyofapplicants.soa.entity.Role;
-import by.bntu.surveyofapplicants.soa.entity.User;
 import by.bntu.surveyofapplicants.soa.mapper.FacultyMapper;
 import by.bntu.surveyofapplicants.soa.repository.FacultyRepository;
 import by.bntu.surveyofapplicants.soa.util.IdentityChecker;
@@ -13,7 +9,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 @Service

@@ -1,7 +1,6 @@
 package by.bntu.surveyofapplicants.soa.service;
 
 import by.bntu.surveyofapplicants.soa.dto.SpecialtyDto;
-import by.bntu.surveyofapplicants.soa.entity.Faculty;
 import by.bntu.surveyofapplicants.soa.entity.Specialty;
 import by.bntu.surveyofapplicants.soa.mapper.SpecialtyMapper;
 import by.bntu.surveyofapplicants.soa.repository.SpecialtyRepository;

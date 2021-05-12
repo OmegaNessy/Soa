@@ -8,9 +8,9 @@
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"/>
 </head>
 <body>
-<h1>Редактирование вопроса</h1>
 <form action="/admin/test/question/edit" th:object="${question}" method="post">
     <table>
+        <caption><h1>Редактирование вопроса</h1></caption>
         <tr><td>Тип вопроса:</td>
             <td><select name = "questionType" >
                 <option th:each="question : ${questionTypes}"
@@ -49,5 +49,4 @@
     </table>
 </form>
 </body>
-
 </html>

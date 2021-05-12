@@ -1,11 +1,13 @@
 package by.bntu.surveyofapplicants.soa.dto;
 
 import by.bntu.surveyofapplicants.soa.entity.Role;
+import lombok.Data;
 
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Pattern;
 import java.util.Set;
 
+@Data
 public class UserDto {
     private Long id;
 
@@ -18,9 +20,6 @@ public class UserDto {
     private String password;
 
     private String confirmedPassword;
-
-    public UserDto() {
-    }
 
     public Long getId() {
         return id;

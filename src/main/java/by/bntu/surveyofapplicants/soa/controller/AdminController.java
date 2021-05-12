@@ -118,21 +118,6 @@ public class AdminController {
         return "redirect:/admin/specialtyList";
     }
 
-//    @PostMapping("/faculty/edit")
-//    public String addFaculty(@ModelAttribute("faculty") @Valid FacultyDto dto, BindingResult result, Model model){
-//        if (result.hasErrors()){
-//            model.addAttribute("faculty", dto);
-//            return "editFaculty";
-//        }
-//        if(!facultyService.saveFaculty(dto)){
-//            model.addAttribute("facultyError", "Факультет с таким именем уже существует");
-//            model.addAttribute("faculty", dto);
-//            return "editFaculty";
-//        }
-//
-//        return "redirect:/admin/facultyList";
-//    }
-
     @GetMapping("/users")
     public String userList(Model model) {
         model.addAttribute("allUsers", userService.allUsers());

@@ -8,9 +8,10 @@
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"/>
 </head>
 <body>
-<h1>Редактирование ответа</h1>
+
 <form action="/admin/test/question/answer/edit" th:object="${answer}" method="post">
     <table>
+        <caption><h1>Редактирование ответа</h1></caption>
         <tr>
             <td>Ответ:</td>
             <td><input type="text" name="answerText" th:value="*{answerText}"/></td>
