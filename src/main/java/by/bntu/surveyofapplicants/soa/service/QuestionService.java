@@ -1,13 +1,9 @@
 package by.bntu.surveyofapplicants.soa.service;
 
 import by.bntu.surveyofapplicants.soa.dto.QuestionDto;
-import by.bntu.surveyofapplicants.soa.dto.TestDto;
 import by.bntu.surveyofapplicants.soa.entity.Question;
-import by.bntu.surveyofapplicants.soa.entity.Test;
 import by.bntu.surveyofapplicants.soa.mapper.QuestionMapper;
-import by.bntu.surveyofapplicants.soa.mapper.TestMapper;
 import by.bntu.surveyofapplicants.soa.repository.QuestionRepository;
-import by.bntu.surveyofapplicants.soa.repository.TestRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -25,7 +21,6 @@ public class QuestionService {
     public void saveQuestion(QuestionDto dto){
         Question question = mapper.toEntity(dto);
         questionRepository.save(question);
-        System.out.println("smth");
     }
 
     public List<QuestionDto> getAllQuestionsByTestId(Long id){
@@ -44,7 +39,5 @@ public class QuestionService {
     public QuestionDto getQuestionById(Long id){
         return mapper.toDto(questionRepository.findById(id).orElseThrow(NullPointerException::new));
     }
-//    public TestDto getTestById(Long id){
-//        return mapper.toDto(testRepository.findById(id).orElseThrow(NullPointerException::new));
-//    }
+
 }

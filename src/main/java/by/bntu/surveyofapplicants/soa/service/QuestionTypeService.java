@@ -1,7 +1,6 @@
 package by.bntu.surveyofapplicants.soa.service;
 
 import by.bntu.surveyofapplicants.soa.dto.QuestionTypeDto;
-import by.bntu.surveyofapplicants.soa.entity.Question;
 import by.bntu.surveyofapplicants.soa.entity.QuestionType;
 import by.bntu.surveyofapplicants.soa.mapper.QuestionTypeMapper;
 import by.bntu.surveyofapplicants.soa.repository.QuestionTypeRepository;

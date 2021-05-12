@@ -1,5 +1,5 @@
 <!DOCTYPE HTML>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" lang="">
 <head>
     <meta charset="UTF-8"/>
     <title>Edit Question</title>
@@ -8,13 +8,14 @@
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"/>
 </head>
 <body>
-<h1>Редактирование списка факультетов</h1>
 <form action="/admin/faculty/edit" th:object="${faculty}" method="post">
     <table>
+        <caption><h2>Редактирование списка факультетов</h2></caption>
         <tr>
             <td>Название:</td>
             <td><input type="text" name="name" th:value="*{name}"/></td>
             <td th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Name Error</td>
+            <span th:if="${facultyError}"  th:text="${facultyError}">Error</span>
         </tr>
         <tr>
             <td>Краткая информация:</td>
@@ -66,49 +67,12 @@
         </tr>
         <tr>
             <td><a  href="/admin/facultyList" class="btn btn-success">
-                <i class="fa fa-arrow-circle-o-left"></i>
+                <em class="fa fa-arrow-circle-o-left"></em>
                 &nbsp; Назад
             </a></td>
         </tr>
     </table>
-<!--    <p>-->
-<!--        <label>Название:</label>-->
-<!--        <input type="text" name="name" th:value="${faculty.name}"/>-->
-<!--    </p>-->
-<!--    <p>-->
-<!--        <label>Краткая информация:</label>-->
-<!--        <input type="text" name="shortInformation" th:default="null" th:value="${faculty.shortInformation}"/>-->
-<!--    </p>-->
-<!--    <p>-->
-<!--        <label>Полная информация:</label>-->
-<!--        <input type="text" name="information" th:value="${faculty.information}"/>-->
-<!--    </p>-->
-<!--    <p>-->
-<!--        <label>Рейтинг факультета:</label>-->
-<!--        <input type="text" name="facultyRating" th:value="${faculty.facultyRating}"/>-->
-<!--    </p>-->
-<!--    <p>-->
-<!--        <label>Рейтинг общежития:</label>-->
-<!--        <input type="text" name="hostelRating" th:value="${faculty.hostelRating}"/>-->
-<!--    </p>-->
-<!--    <p>-->
-<!--        <label>Рейтинг студсовета:</label>-->
-<!--        <input type="text" name="studentAssetRating" th:value="${faculty.studentAssetRating}"/>-->
-<!--    </p>-->
-<!--    <p>-->
-<!--        <label>Рейтинг обучающего процесса:</label>-->
-<!--        <input type="text" name="studyRating" th:value="${faculty.studyRating}"/>-->
-<!--    </p>-->
-<!--    <p>-->
-<!--        <label>Номер корпуса факультета:</label>-->
-<!--        <input type="text" name="campus" th:value="${faculty.campus}"/>-->
-<!--    </p>-->
-<!--    <p>-->
-<!--        <input type="hidden" name="id" th:value="${faculty.id}">-->
-<!--    </p>-->
-<!--    <p>-->
-<!--        <input type="submit" value="Обновить список">-->
-<!--    </p>-->
+
 </form>
 </body>
 

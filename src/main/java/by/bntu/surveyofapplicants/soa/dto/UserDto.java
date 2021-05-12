@@ -2,10 +2,8 @@ package by.bntu.surveyofapplicants.soa.dto;
 
 import by.bntu.surveyofapplicants.soa.entity.Role;
 
-import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Pattern;
-import javax.validation.constraints.Size;
 import java.util.Set;
 
 public class UserDto {
@@ -16,7 +14,6 @@ public class UserDto {
 
     private Set<Role> roles;
 
-//    @Size(min = 8, max = 25, message = "Длинна от 8 до 25 символов. Обязательна 1 цифра и 1 строчная буква.")
     @Pattern(regexp = "^(?=.*[0-9])(?=.*[A-Z])(?=\\S+$).{8,25}$",message = "Длинна от 8 до 25 символов. Обязательна 1 цифра и 1 строчная буква.")
     private String password;
 

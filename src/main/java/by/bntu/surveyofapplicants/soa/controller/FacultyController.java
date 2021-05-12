@@ -1,7 +1,7 @@
 package by.bntu.surveyofapplicants.soa.controller;
 
-import by.bntu.surveyofapplicants.soa.entity.Faculty;
-import by.bntu.surveyofapplicants.soa.repository.FacultyRepository;
+import by.bntu.surveyofapplicants.soa.dto.FacultyDto;
+import by.bntu.surveyofapplicants.soa.service.FacultyService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -12,20 +12,20 @@ import java.util.List;
 @RestController
 public class FacultyController {
     @Autowired
-    FacultyRepository repo;
+    FacultyService service;
 
     @GetMapping("/faculty/all")
-    public List<Faculty> getAll(){
-        return repo.findAll();
+    public List<FacultyDto> getAll(){
+        return service.getAllFaculties();
     }
 
     @GetMapping("/faculty/{id}")
-    public Faculty getById(@PathVariable Long id){
-        return repo.findById(id).orElseThrow(NullPointerException::new);
+    public FacultyDto getById(@PathVariable Long id){
+        return service.getFacultyById(id);
     }
 
     @GetMapping("/faculty/search/{searchString}")
-    public List<Faculty> getSpecialtiesBySearchString(@PathVariable String searchString){
-        return repo.findAllByNameStartingWith(searchString);
+    public List<FacultyDto> getSpecialtiesBySearchString(@PathVariable String searchString){
+        return service.facultiesSearch(searchString);
     }
 }

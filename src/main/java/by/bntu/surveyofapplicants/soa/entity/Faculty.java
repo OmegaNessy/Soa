@@ -5,13 +5,13 @@ import lombok.*;
 import javax.persistence.*;
 
 @Entity
-@Data
 @Getter
 @Setter
+@EqualsAndHashCode
 @AllArgsConstructor
 @NoArgsConstructor
 @Table(name = "FACULTIES")
-public class Faculty implements JsonIgnoreWraper {
+public class Faculty implements JsonIgnoreWraper, IdentityCheckable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -47,4 +47,6 @@ public class Faculty implements JsonIgnoreWraper {
     @Column(name = "SHORT_INFORMATION")
     @NonNull
     private String shortInformation;
+
+
 }

@@ -1,5 +1,5 @@
 <!DOCTYPE HTML>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" lang="">
 <head>
     <meta charset="UTF-8"/>
     <title>Add specialty</title>
@@ -8,14 +8,15 @@
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"/>
 </head>
 <body>
-<h1>Обновление списка специальностей</h1>
+
 <form action="/admin/specialty/add" th:object="${specialty}" method="post">
     <table>
+        <caption><h2>Обновление списка специальностей</h2></caption>
         <tr>
             <td>Имя:</td>
             <td><input type="text" name="name" th:value="${specialty.name}"/></td>
             <td th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Name Error</td>
-
+            <span th:id="${specialtyError}" th:text="${specialtyError}">Error</span>
         </tr>
         <tr>
             <td>Название факультета:</td>
@@ -68,64 +69,12 @@
             <td><input type="hidden" name="id" th:value="${specialty.id}"></td>
         </tr>
         <tr>
-            <td><a  href="/admin/facultyList" class="btn btn-success">
-                <i class="fa fa-arrow-circle-o-left"></i>
+            <td><a  href="/admin/specialtyList" class="btn btn-success">
+                <em class="fa fa-arrow-circle-o-left"></em>
                 &nbsp; Назад
             </a></td>
         </tr>
     </table>
-<!--    <p>-->
-<!--        <input type="hidden" name="id" th:value="${specialty.id}"/>-->
-<!--    </p>-->
-<!--    <p>-->
-<!--        <label>Имя:</label>-->
-<!--        <input type="text" name="name" th:value="${specialty.name}"/>-->
-<!--    </p>-->
-<!--    <p>-->
-<!--        <label>Название факультета:</label>-->
-<!--        <select name="facultyName">-->
-<!--            <option th:each="faculty : ${facultyList}"-->
-<!--                    th:value="${faculty.name}"-->
-<!--                    th:text="${faculty.name}"></option>-->
-<!--        </select>-->
-<!--    </p>-->
-<!--    <p>-->
-<!--        <label>Информация:</label>-->
-<!--        <input type="text" name="information" th:value="${specialty.information}"/>-->
-<!--    </p>-->
-<!--    <p>-->
-<!--        <label>Проходной балл:</label>-->
-<!--        <input type="text" name="passingScore" th:value="${specialty.passingScore}"/>-->
-<!--    </p>-->
-
-<!--    <p>-->
-<!--        <label>Первый предмет:</label>-->
-<!--        <select name="firstSubjectName">-->
-<!--            <option th:each="subject : ${subjectList}"-->
-<!--                    th:value="${subject.name}"-->
-<!--                    th:text="${subject.name}"></option>-->
-<!--        </select>-->
-<!--    </p>-->
-
-<!--    <p>-->
-<!--        <label>Второй предмет:</label>-->
-<!--        <select name="secondSubjectName">-->
-<!--            <option th:each="subject : ${subjectList}"-->
-<!--                    th:value="${subject.name}"-->
-<!--                    th:text="${subject.name}"></option>-->
-<!--        </select>-->
-<!--    </p>-->
-<!--    <p>-->
-<!--        <label>Третий предмет:</label>-->
-<!--        <select name="thirdSubjectName">-->
-<!--            <option th:each="subject : ${subjectList}"-->
-<!--                    th:value="${subject.name}"-->
-<!--                    th:text="${subject.name}"></option>-->
-<!--        </select>-->
-<!--    </p>-->
-<!--    <p>-->
-<!--        <input type="submit" value="Обновить">-->
-<!--    </p>-->
 </form>
 </body>
 

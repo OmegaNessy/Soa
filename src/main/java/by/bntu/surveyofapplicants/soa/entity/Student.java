@@ -1,10 +1,8 @@
 package by.bntu.surveyofapplicants.soa.entity;
 
 import lombok.*;
-import org.springframework.stereotype.Component;
 
 import javax.persistence.*;
-import java.util.List;
 
 @Entity
 @Data

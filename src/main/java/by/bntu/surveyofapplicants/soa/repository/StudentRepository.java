@@ -1,7 +1,6 @@
 package by.bntu.surveyofapplicants.soa.repository;
 
 import by.bntu.surveyofapplicants.soa.entity.Student;
-import by.bntu.surveyofapplicants.soa.entity.Test;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;

@@ -2,7 +2,6 @@ package by.bntu.surveyofapplicants.soa.entity;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.*;
-import lombok.extern.log4j.Log4j2;
 
 import javax.persistence.*;
 import java.util.List;

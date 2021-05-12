@@ -1,12 +1,6 @@
 package by.bntu.surveyofapplicants.soa.controller;
 
 import by.bntu.surveyofapplicants.soa.dto.*;
-import by.bntu.surveyofapplicants.soa.entity.Faculty;
-import by.bntu.surveyofapplicants.soa.entity.Question;
-import by.bntu.surveyofapplicants.soa.entity.Test;
-import by.bntu.surveyofapplicants.soa.repository.FacultyRepository;
-import by.bntu.surveyofapplicants.soa.repository.SpecialtyRepository;
-import by.bntu.surveyofapplicants.soa.repository.TestRepository;
 import by.bntu.surveyofapplicants.soa.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -15,17 +9,10 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import java.util.List;
 
 @Controller
 @RequestMapping("/admin")
 public class AdminController {
-    @Autowired
-    FacultyRepository facultyRepository;
-    @Autowired
-    SpecialtyRepository specialtyRepository;
-    @Autowired
-    TestRepository testRepository;
     @Autowired
     SpecialtyService specialtyService;
     @Autowired
@@ -50,13 +37,13 @@ public class AdminController {
 
     @GetMapping("/facultyList")
     public String getAllFaculties(Model model){
-        model.addAttribute("facultyList",facultyRepository.findAll());
+        model.addAttribute("facultyList",facultyService.getAllFaculties());
         return "facultyPage";
     }
 
     @GetMapping("/deleteFaculty/{id}")
     public String deleteFaculty(@PathVariable Long id, Model model) {
-        facultyRepository.deleteById(id);
+        facultyService.deleteFaculty(id);
         return getAllFaculties(model);
     }
     @GetMapping("/faculty/edit/{id}")
@@ -72,11 +59,17 @@ public class AdminController {
     }
 
     @PostMapping("/faculty/edit")
-    public String addFaculty(@ModelAttribute("faculty") @Valid FacultyDto dto, BindingResult result){
+    public String addFaculty(@ModelAttribute("faculty") @Valid FacultyDto dto, BindingResult result, Model model){
         if (result.hasErrors()){
+            model.addAttribute("faculty", dto);
             return "editFaculty";
         }
-        facultyService.saveFaculty(dto);
+        if(!facultyService.saveFaculty(dto)){
+            model.addAttribute("facultyError", "Факультет с таким именем уже существует");
+            model.addAttribute("faculty", dto);
+            return "editFaculty";
+        }
+
         return "redirect:/admin/facultyList";
     }
 
@@ -87,8 +80,8 @@ public class AdminController {
     }
 
     @GetMapping("/deleteSpecialty/{id}")
-    public String deleteSpecialty(@PathVariable String id) {
-        specialtyRepository.deleteById(Long.valueOf(id));
+    public String deleteSpecialty(@PathVariable Long id) {
+        specialtyService.deleteSpecialty(id);
         return "redirect:/admin/specialtyList";
     }
 
@@ -115,9 +108,30 @@ public class AdminController {
             model.addAttribute("subjectList",subjectService.getAllSubjects());
             return "addSpecialtyPage";
         }
-        specialtyService.addSpecialty(specialtyDto);
+        if(!specialtyService.addSpecialty(specialtyDto)){
+            model.addAttribute("specialtyError", "Специальность с таким названием уже существует");
+            model.addAttribute("specialty", specialtyDto);
+            model.addAttribute("facultyList",facultyService.getAllFaculties());
+            model.addAttribute("subjectList",subjectService.getAllSubjects());
+            return "addSpecialtyPage";
+        }
         return "redirect:/admin/specialtyList";
     }
+
+//    @PostMapping("/faculty/edit")
+//    public String addFaculty(@ModelAttribute("faculty") @Valid FacultyDto dto, BindingResult result, Model model){
+//        if (result.hasErrors()){
+//            model.addAttribute("faculty", dto);
+//            return "editFaculty";
+//        }
+//        if(!facultyService.saveFaculty(dto)){
+//            model.addAttribute("facultyError", "Факультет с таким именем уже существует");
+//            model.addAttribute("faculty", dto);
+//            return "editFaculty";
+//        }
+//
+//        return "redirect:/admin/facultyList";
+//    }
 
     @GetMapping("/users")
     public String userList(Model model) {
@@ -145,7 +159,7 @@ public class AdminController {
 
     @GetMapping("/deleteTest/{id}")
     public String deleteTest(@PathVariable Long id, Model model) {
-        testRepository.deleteById(id);
+        testService.deleteTest(id);
         return "redirect:/admin/test";
     }
 
@@ -276,9 +290,5 @@ public class AdminController {
         model.addAttribute("faculties",facultyService.getAllFaculties());
         return "editAnswer";
     }
-//    @PostMapping("/test/edit")
-//    public String editTest(@ModelAttribute TestDto testDto){
-//        testService.saveTest(testDto);
-//        return "redirect:/admin/test";
-//    }
+
 }

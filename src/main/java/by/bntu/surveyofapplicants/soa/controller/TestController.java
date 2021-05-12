@@ -2,8 +2,7 @@ package by.bntu.surveyofapplicants.soa.controller;
 
 import by.bntu.surveyofapplicants.soa.dto.MobileDto;
 import by.bntu.surveyofapplicants.soa.dto.ResultDto;
-import by.bntu.surveyofapplicants.soa.entity.Test;
-import by.bntu.surveyofapplicants.soa.repository.TestRepository;
+import by.bntu.surveyofapplicants.soa.dto.TestApiDto;
 import by.bntu.surveyofapplicants.soa.service.TestService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -17,22 +16,19 @@ public class TestController {
     @Autowired
     TestService service;
 
-    @Autowired
-    TestRepository repository;
-
     @GetMapping("/test/{id}")
-    public Test testById(@PathVariable Long id){
-        return repository.findTestByFacultyId(id);
+    public TestApiDto testById(@PathVariable Long id){
+        return service.getTestApiById(id);
     }
 
     @GetMapping("/test/general")
-    public Test generalTest(){
-        return repository.findTestByTestType(GENERAL_TEST_NAME);
+    public TestApiDto generalTest(){
+        return service.getGeneralTest(GENERAL_TEST_NAME);
     }
 
     @GetMapping("/test/all")
-    public List<Test> getAllTests(){
-        return repository.findAll();
+    public List<TestApiDto> getAllTests(){
+        return service.getAllApiTests();
     }
 
     @PostMapping("/test/result/add")

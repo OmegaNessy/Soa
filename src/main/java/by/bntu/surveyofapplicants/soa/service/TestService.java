@@ -2,6 +2,7 @@ package by.bntu.surveyofapplicants.soa.service;
 
 import by.bntu.surveyofapplicants.soa.dto.MobileDto;
 import by.bntu.surveyofapplicants.soa.dto.ResultDto;
+import by.bntu.surveyofapplicants.soa.dto.TestApiDto;
 import by.bntu.surveyofapplicants.soa.dto.TestDto;
 import by.bntu.surveyofapplicants.soa.entity.Answer;
 import by.bntu.surveyofapplicants.soa.entity.Student;
@@ -39,8 +40,6 @@ public class TestService {
     @Autowired
     TestResultRepository testResultRepository;
 
-    private final String DELIMITER = " ";
-
     public boolean saveTest(TestDto dto) {
         boolean flag = false;
         if (dto.getFacultyName().isEmpty() || Objects.isNull(dto.getFacultyName())) {
@@ -59,6 +58,9 @@ public class TestService {
         return flag;
     }
 
+    public TestApiDto getGeneralTest(String value){
+        return mapper.toApiDto(testRepository.findTestByTestType(value));
+    }
     public List<TestDto> getAllTests(){
         List<TestDto> testsListDto = new ArrayList<>();
         List<Test> testsList = testRepository.findAll();
@@ -68,9 +70,21 @@ public class TestService {
         return testsListDto;
     }
 
+    public List<TestApiDto> getAllApiTests(){
+        List<TestApiDto> testsListDto = new ArrayList<>();
+        List<Test> testsList = testRepository.findAll();
+        for (Test test:testsList) {
+            testsListDto.add(mapper.toApiDto(test));
+        }
+        return testsListDto;
+    }
 
     public TestDto getTestById(Long id){
         return mapper.toDto(testRepository.findById(id).orElseThrow(NullPointerException::new));
+    }
+
+    public TestApiDto getTestApiById(Long id){
+        return mapper.toApiDto(testRepository.findById(id).orElseThrow(NullPointerException::new));
     }
 
     public ResultDto saveTestResult(MobileDto dto){
@@ -84,30 +98,30 @@ public class TestService {
     }
 
     public List<TestResult> getAllResults(){
-        List<TestResult> testResults = testResultRepository.findAll();
-        for(TestResult result:testResults){
-            result.setScore(result.getScore().split(DELIMITER)[0]);
-        }
-        return testResults;
+        return testResultRepository.findAll();
+
     }
 
     public Map<Long,String> getAllTestsOfResults(List<TestResult> results){
-        List<Long> ids = results.stream().map(s -> s.getTestId()).collect(Collectors.toList());
+        List<Long> ids = results.stream().map(TestResult::getTestId).collect(Collectors.toList());
         List<Test> testList = testRepository.findByIdIn(ids);
         return testList.stream().collect(Collectors.toMap(Test::getId, Test::getTestType));
     }
 
+    public void deleteTest(Long id){
+        testRepository.deleteById(id);
+    }
     private String calculateResult(List<Long> answersIdList){
         Map<String,Integer> resultMap = new HashMap<>();
+        int fullScore = 0;
         List<Answer> answerList = answerRepository.findAllByIdIn(answersIdList);
         for(Answer answer:answerList){
-//            fullScore += answer.getScore();
+            fullScore += answer.getScore();
             resultMap.merge(answer.getMembership(),answer.getScore(), Integer::sum);
         }
         Optional<Map.Entry<String,Integer>> maxScore = resultMap.entrySet()
                 .stream()
                 .max(Map.Entry.comparingByValue());
-        return maxScore.map(Object::toString).orElse(null);
+        return maxScore.map(Object::toString).orElse(null)+" из " + fullScore;
     }
-
 }

@@ -18,25 +18,26 @@ public class RegistrationController {
     @Autowired
     private UserService userService;
 
+    private static final String REGISTRATION_PAGE = "registration";
     @GetMapping("/registration")
     public String registration(Model model) {
         model.addAttribute("userForm", new UserDto());
-        return "registration";
+        return REGISTRATION_PAGE;
     }
 
     @PostMapping("/registration")
     public String addUser(@ModelAttribute("userForm") @Valid UserDto userForm, BindingResult bindingResult, Model model) {
 
         if (bindingResult.hasErrors()) {
-            return "registration";
+            return REGISTRATION_PAGE;
         }
         if (!userForm.getPassword().equals(userForm.getConfirmedPassword())){
             model.addAttribute("passwordError", "Пароли не совпадают");
-            return "registration";
+            return REGISTRATION_PAGE;
         }
         if (!userService.saveUser(userForm)){
             model.addAttribute("usernameError", "Пользователь с таким именем уже существует");
-            return "registration";
+            return REGISTRATION_PAGE;
         }
 
         return "redirect:/";

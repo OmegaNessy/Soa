@@ -2,7 +2,6 @@ package by.bntu.surveyofapplicants.soa.mapper;
 
 import by.bntu.surveyofapplicants.soa.dto.QuestionTypeDto;
 import by.bntu.surveyofapplicants.soa.dto.SubjectDto;
-import by.bntu.surveyofapplicants.soa.entity.QuestionType;
 import by.bntu.surveyofapplicants.soa.entity.Subject;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;

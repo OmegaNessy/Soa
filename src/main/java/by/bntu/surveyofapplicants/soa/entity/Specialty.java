@@ -12,14 +12,10 @@ import javax.persistence.*;
 @NoArgsConstructor
 @RequiredArgsConstructor
 @Table(name = "SPECIALTY")
-public class Specialty implements JsonIgnoreWraper{
+public class Specialty implements JsonIgnoreWraper, IdentityCheckable{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
-//    @ManyToOne(fetch = FetchType.LAZY,optional = false)
-//    @JoinColumn(name = "PARENT_ID")
-//    private Faculty faculty;
 
     @Column(name = "PARENT_ID")
     @NonNull
@@ -32,21 +28,6 @@ public class Specialty implements JsonIgnoreWraper{
     @Column(name = "INFORMATION")
     @NonNull
     private String information;
-
-//    @ManyToOne(fetch = FetchType.LAZY,optional = false)
-//    @JoinColumn(name = "FIRST_SUBJECT_ID")
-//    @NonNull
-//    private Subject firstSubjectId;
-//
-//    @ManyToOne(fetch = FetchType.LAZY)
-//    @JoinColumn(name = "SECOND_SUBJECT_ID")
-//    @NonNull
-//    private Subject secondSubjectId;
-//
-//    @ManyToOne(fetch = FetchType.LAZY)
-//    @JoinColumn(name = "THIRD_SUBJECT_ID")
-//    @NonNull
-//    private Subject thirdSubjectId;
 
     @Column(name = "FIRST_SUBJECT_ID")
     @NonNull

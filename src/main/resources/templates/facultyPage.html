@@ -1,5 +1,5 @@
 <!DOCTYPE HTML>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" lang="">
 <head>
     <meta charset="UTF-8" />
     <title>Faculties</title>
@@ -8,17 +8,17 @@
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"/>
 </head>
 <body>
-<h1>Список факультетов</h1>
 <table border="1" style="width:300px">
+    <caption><h2>Список факультетов</h2></caption>
     <tr>
-        <td>Имя</td>
-        <td>Краткая информация</td>
-        <td>Полная информация</td>
-        <td>Корпус</td>
-        <td>Рейтинг факультета</td>
-        <td>Рейтинг общежития</td>
-        <td>Рейтинг студсовета</td>
-        <td>Рейтинг обучения</td>
+        <th>Имя</th>
+        <th>Краткая информация</th>
+        <th>Полная информация</th>
+        <th>Корпус</th>
+        <th>Рейтинг факультета</th>
+        <th>Рейтинг общежития</th>
+        <th>Рейтинг студсовета</th>
+        <th>Рейтинг обучения</th>
 
     </tr>
     <th:block th:each="faculty : ${facultyList}">
@@ -32,23 +32,23 @@
             <td th:text="${faculty.studentAssetRating}"/>
             <td th:text="${faculty.studyRating}"/>
             <td><a  href="/admin/deleteFaculty" th:href="@{'/admin/deleteFaculty/' + ${faculty.id}}" class="btn btn-success">
-                <i class="fa fa-arrow-circle-o-left"></i>
+                <em class="fa fa-arrow-circle-o-left"></em>
                 &nbsp; Удалить
             </a></td>
             <td><a th:href="@{'/admin/faculty/edit/' + ${faculty.id}}" class="btn btn-success">
-                <i class="fa fa-arrow-circle-o-left"></i>
+                <em class="fa fa-arrow-circle-o-left"></em>
                 &nbsp; Редактировать
             </a></td>
         </tr>
     </th:block>
 
 </table>
-<a href="/admin/main" class="btn btn-success">
-    <i class="fa fa-arrow-circle-o-left"></i>
+<a href="/" class="btn btn-success">
+    <em class="fa fa-arrow-circle-o-left"></em>
     &nbsp; Назад на главый экран
 </a>
 <a th:href="@{'/admin/faculty/edit'}" class="btn btn-success">
-    <i class="fa fa-arrow-circle-o-left"></i>
+    <em class="fa fa-arrow-circle-o-left"></em>
     &nbsp; Добавить факультет
 </a>
 </body>

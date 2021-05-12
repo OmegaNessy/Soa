@@ -1,5 +1,6 @@
 package by.bntu.surveyofapplicants.soa.mapper;
 
+import by.bntu.surveyofapplicants.soa.dto.TestApiDto;
 import by.bntu.surveyofapplicants.soa.dto.TestDto;
 import by.bntu.surveyofapplicants.soa.entity.Faculty;
 import by.bntu.surveyofapplicants.soa.entity.Test;
@@ -26,6 +27,14 @@ public class TestMapper {
 
     public TestDto toDto(Test entity) {
         return Objects.nonNull(entity) ? new TestDto(entity.getId(),entity.getTestType(),obtainFacultyName(entity.getFacultyId())):null;
+    }
+
+    public TestApiDto toApiDto(Test entity){
+        return Objects.nonNull(entity) ? modelMapper.map(entity,TestApiDto.class):null;
+    }
+
+    public Test toApiEntity(TestApiDto dto){
+        return Objects.nonNull(dto) ? modelMapper.map(dto,Test.class):null;
     }
 
     private String obtainFacultyName(Long facultyId){

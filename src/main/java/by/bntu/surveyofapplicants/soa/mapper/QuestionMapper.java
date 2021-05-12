@@ -1,11 +1,8 @@
 package by.bntu.surveyofapplicants.soa.mapper;
 
 import by.bntu.surveyofapplicants.soa.dto.QuestionDto;
-import by.bntu.surveyofapplicants.soa.dto.TestDto;
-import by.bntu.surveyofapplicants.soa.entity.Faculty;
 import by.bntu.surveyofapplicants.soa.entity.Question;
 import by.bntu.surveyofapplicants.soa.entity.Test;
-import by.bntu.surveyofapplicants.soa.repository.FacultyRepository;
 import by.bntu.surveyofapplicants.soa.repository.QuestionRepository;
 import by.bntu.surveyofapplicants.soa.repository.QuestionTypeRepository;
 import by.bntu.surveyofapplicants.soa.repository.TestRepository;

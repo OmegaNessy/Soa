@@ -30,7 +30,6 @@ public class AnswerService {
     public void saveAnswer(AnswerDto dto) {
         Answer answer = mapper.toEntity(dto);
         answerRepository.save(answer);
-        System.out.println("smth");
     }
 
     public void deleteById(Long id){

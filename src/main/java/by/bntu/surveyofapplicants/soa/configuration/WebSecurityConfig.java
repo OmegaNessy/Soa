@@ -16,6 +16,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     UserService userService;
 
+    private static final String ADMIN="ADMIN";
+    private static final String USER="USER";
+
     @Bean
     public BCryptPasswordEncoder bCryptPasswordEncoder() {
         return new BCryptPasswordEncoder();
@@ -29,10 +32,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .authorizeRequests()
                 //Доступ только для не зарегистрированных пользователей
                 //Доступ только для пользователей с ролью Администратор
-                .antMatchers("/registration").hasRole("ADMIN")
-                .antMatchers("/admin/**").hasRole("ADMIN")
-                .antMatchers("/user/**").hasAnyRole("ADMIN","USER")
-                //TODO: .antMatchers("/news").hasRole("USER")
+                .antMatchers("/registration").hasRole(ADMIN)
+                .antMatchers("/admin/**").hasRole(ADMIN)
+                .antMatchers("/user/**").hasAnyRole(ADMIN,USER)
                 .antMatchers("/test/**").permitAll()
                 .antMatchers("/faculty/**").permitAll()
                 .antMatchers("/specialty/**").permitAll()

@@ -4,9 +4,9 @@ package by.bntu.surveyofapplicants.soa.entity;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.*;
-import lombok.extern.log4j.Log4j2;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.List;
 
 @Entity
@@ -16,7 +16,7 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @Table(name = "QUESTION")
-public class Question implements JsonIgnoreWraper{
+public class Question implements JsonIgnoreWraper, Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

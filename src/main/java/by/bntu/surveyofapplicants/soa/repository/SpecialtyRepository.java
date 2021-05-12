@@ -8,4 +8,5 @@ import java.util.List;
 public interface SpecialtyRepository extends JpaRepository<Specialty,Long> {
     List<Specialty> findSpecialtiesByParentId(Long id);
     List<Specialty> findAllByNameStartingWith(String searchString);
+    Specialty findByName(String name);
 }

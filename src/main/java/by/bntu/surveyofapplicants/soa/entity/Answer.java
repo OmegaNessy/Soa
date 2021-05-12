@@ -1,7 +1,6 @@
 package by.bntu.surveyofapplicants.soa.entity;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
 import javax.persistence.*;
@@ -31,7 +30,6 @@ public class Answer implements JsonIgnoreWraper{
     private String answerText;
 
     @Column(name = "MEMBERSHIP")
-    @NonNull
     private String membership;
 
     public Answer (Question question, String answerText, Integer score){
@@ -39,7 +37,5 @@ public class Answer implements JsonIgnoreWraper{
         this.answerText = answerText;
         this.score = score;
     }
-//
-//    @Column(name = "FACULTY_ID")
-//    private Long facultyId;
+
 }
