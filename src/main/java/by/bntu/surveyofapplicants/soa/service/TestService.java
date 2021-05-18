@@ -45,7 +45,7 @@ public class TestService {
         if (dto.getFacultyName().isEmpty() || Objects.isNull(dto.getFacultyName())) {
             dto.setFacultyName(null);
         }
-        if(dto.getTestType().equals("Общий")) {
+        if("Общий".equals(dto.getTestType())) {
             if (Objects.isNull(testRepository.findTestByTestType("Общий"))) {
                 testRepository.save(mapper.toEntity(dto));
                 flag = true;
@@ -94,6 +94,7 @@ public class TestService {
         }
         dto.setStudent(student);
         String result = Objects.requireNonNull(calculateResult(dto.getAnswersIds())).replace("="," , ").concat(" баллов");
+        TestResult testResult = testResultRepository.save(resultMapper.toEntity(dto,result));
         return resultMapper.toDto(testResultRepository.save(resultMapper.toEntity(dto,result)));
     }
 

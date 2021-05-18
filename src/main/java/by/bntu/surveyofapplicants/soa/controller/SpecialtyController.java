@@ -1,5 +1,6 @@
 package by.bntu.surveyofapplicants.soa.controller;
 
+import by.bntu.surveyofapplicants.soa.dto.FacultyDto;
 import by.bntu.surveyofapplicants.soa.dto.SpecialtyDto;
 import by.bntu.surveyofapplicants.soa.service.SpecialtyService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +23,11 @@ public class SpecialtyController {
     @GetMapping("/faculty/{id}/specialty")
     public List<SpecialtyDto> getSpecialty(@PathVariable Long id){
         return service.getSpecialtiesByParentId(id);
+    }
+
+    @GetMapping("/specialty/{id}")
+    public SpecialtyDto getById(@PathVariable Long id){
+        return service.getSpecialtyById(id);
     }
 
     @GetMapping("/specialty/search/{searchString}")

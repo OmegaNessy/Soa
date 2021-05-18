@@ -31,6 +31,11 @@ public class TestController {
         return service.getAllApiTests();
     }
 
+//    @GetMapping("/test/faculty/{searchString}")
+//    public TestApiDto getTestByConnectedFaculty(@PathVariable String searchString){
+//        return service.getT
+//    }
+
     @PostMapping("/test/result/add")
     public ResultDto addTestResult(@RequestBody MobileDto dto){
         return service.saveTestResult(dto);

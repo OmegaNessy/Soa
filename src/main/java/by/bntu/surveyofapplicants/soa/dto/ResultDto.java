@@ -5,12 +5,12 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
+
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 public class ResultDto {
-    private Long id;
-    private Long testId;
     private String score;
-    private Long studentId;
+    private List<ResultAttribute> attributes;
 }

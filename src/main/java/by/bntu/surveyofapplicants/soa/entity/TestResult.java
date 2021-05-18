@@ -1,12 +1,13 @@
 package by.bntu.surveyofapplicants.soa.entity;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.*;
 
 import javax.persistence.*;
+import java.util.List;
 
 
 @Entity
-@Data
 @Getter
 @Setter
 @AllArgsConstructor
@@ -34,4 +35,5 @@ public class TestResult implements JsonIgnoreWraper{
         this.studentId = studentId;
         this.score = score;
     }
+
 }

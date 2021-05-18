@@ -128,7 +128,7 @@ public class AdminController {
     public String  deleteUser(@RequestParam(required = true, defaultValue = "" ) Long userId,
                               @RequestParam(required = true, defaultValue = "" ) String action,
                               Model model) {
-        if (action.equals("delete")){
+        if ("delete".equals(action)){
             userService.deleteUser(userId);
         }
         return "redirect:/admin/users";
