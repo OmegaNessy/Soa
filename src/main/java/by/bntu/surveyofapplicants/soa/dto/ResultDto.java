@@ -1,13 +1,14 @@
 package by.bntu.surveyofapplicants.soa.dto;
 
 
-import lombok.AllArgsConstructor;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 import lombok.NonNull;
 
 @Data
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class ResultDto {
-    @NonNull
-    private ResultAttribute attribute;
+    private FacultyDto faculty;
+    private SpecialtyDto specialty;
+    private String otherResult;
 }
