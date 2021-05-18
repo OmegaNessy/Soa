@@ -7,4 +7,9 @@ import lombok.Setter;
 public class ResultAttribute {
     private String code;
     private String value;
+
+//    public ResultAttribute(String code,String value){
+//        this.code=code;
+//        this.value=value;
+//    }
 }

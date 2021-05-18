@@ -95,7 +95,8 @@ public class TestService {
         dto.setStudent(student);
         String result = Objects.requireNonNull(calculateResult(dto.getAnswersIds())).replace("="," , ").concat(" баллов");
         TestResult testResult = testResultRepository.save(resultMapper.toEntity(dto,result));
-        return resultMapper.toDto(testResultRepository.save(resultMapper.toEntity(dto,result)));
+        testResult.setScore(result.split(" ")[0]);
+        return resultMapper.toDto(testResult);
     }
 
     public List<TestResult> getAllResults(){
