@@ -12,13 +12,13 @@ import java.util.List;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-@Table(name = "TEST")
+@Table(name = "tests")
 public class Test implements JsonIgnoreWraper {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "TESTTYPE")
+    @Column(name = "test_information")
     @NonNull
     private String testType;
 

@@ -3,6 +3,8 @@ package by.bntu.surveyofapplicants.soa.controller;
 import by.bntu.surveyofapplicants.soa.entity.TestResult;
 import by.bntu.surveyofapplicants.soa.service.StudentService;
 import by.bntu.surveyofapplicants.soa.service.TestService;
+import by.bntu.surveyofapplicants.soa.service.impl.StudentServiceImpl;
+import by.bntu.surveyofapplicants.soa.service.impl.TestServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

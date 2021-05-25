@@ -9,7 +9,7 @@ import javax.persistence.*;
 @Setter
 @AllArgsConstructor
 @RequiredArgsConstructor
-@Table(name = "STUDENT")
+@Table(name = "students")
 public class Student implements JsonIgnoreWraper{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

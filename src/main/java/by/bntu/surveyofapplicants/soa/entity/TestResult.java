@@ -1,10 +1,8 @@
 package by.bntu.surveyofapplicants.soa.entity;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.*;
 
 import javax.persistence.*;
-import java.util.List;
 
 
 @Entity
@@ -13,7 +11,7 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @RequiredArgsConstructor
-@Table(name = "TEST_RESULT")
+@Table(name = "tests_results")
 public class TestResult implements JsonIgnoreWraper{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

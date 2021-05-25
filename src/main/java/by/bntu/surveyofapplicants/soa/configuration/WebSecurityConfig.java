@@ -1,6 +1,6 @@
 package by.bntu.surveyofapplicants.soa.configuration;
 
-import by.bntu.surveyofapplicants.soa.service.UserService;
+import by.bntu.surveyofapplicants.soa.service.impl.UserServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -14,8 +14,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 @EnableWebSecurity
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
-    UserService userService;
-
+    UserServiceImpl userService;
     private static final String ADMIN="ADMIN";
     private static final String USER="USER";
 
@@ -35,9 +34,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/registration").hasRole(ADMIN)
                 .antMatchers("/admin/**").hasRole(ADMIN)
                 .antMatchers("/user/**").hasAnyRole(ADMIN,USER)
-//                .antMatchers("/test/**").permitAll()
-//                .antMatchers("/faculty/**").permitAll()
-//                .antMatchers("/specialty/**").permitAll()
                 .antMatchers("/test/**", "/faculty/**", "/specialty/**").permitAll()
                 //Все остальные страницы требуют аутентификации
                 .anyRequest().authenticated()
@@ -53,7 +49,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .permitAll()
                 .logoutSuccessUrl("/");
     }
-
     @Autowired
     protected void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
         auth.userDetailsService(userService).passwordEncoder(bCryptPasswordEncoder());

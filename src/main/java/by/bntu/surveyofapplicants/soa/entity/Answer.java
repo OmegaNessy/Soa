@@ -36,5 +36,4 @@ public class Answer implements JsonIgnoreWraper{
         this.answerText = answerText;
         this.score = score;
     }
-
 }

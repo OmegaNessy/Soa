@@ -4,6 +4,7 @@ import by.bntu.surveyofapplicants.soa.dto.MobileDto;
 import by.bntu.surveyofapplicants.soa.dto.ResultDto;
 import by.bntu.surveyofapplicants.soa.dto.TestApiDto;
 import by.bntu.surveyofapplicants.soa.service.TestService;
+import by.bntu.surveyofapplicants.soa.service.impl.TestServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 

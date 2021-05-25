@@ -26,7 +26,7 @@ public class SpecialtyDto implements Serializable {
     private String information;
 
     @NonNull
-    @Pattern(regexp = "[0-9]{3}", message = "Обязательно для ввода")
+    @Pattern(regexp = "[0-9]{0,3}", message = "Обязательно для ввода. От 1 до 999")
     private String passingScore;
 
     @NonNull

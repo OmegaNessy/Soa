@@ -15,7 +15,7 @@ import java.util.List;
 @EqualsAndHashCode
 @AllArgsConstructor
 @NoArgsConstructor
-@Table(name = "QUESTION")
+@Table(name = "QUESTIONS")
 public class Question implements JsonIgnoreWraper, Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

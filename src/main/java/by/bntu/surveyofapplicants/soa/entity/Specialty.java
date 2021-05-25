@@ -10,7 +10,7 @@ import javax.persistence.*;
 @AllArgsConstructor
 @NoArgsConstructor
 @RequiredArgsConstructor
-@Table(name = "SPECIALTY")
+@Table(name = "SPECIALTIES")
 public class Specialty implements JsonIgnoreWraper, IdentityCheckable{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

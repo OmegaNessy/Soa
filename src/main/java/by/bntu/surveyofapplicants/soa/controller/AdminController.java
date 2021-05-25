@@ -2,6 +2,7 @@ package by.bntu.surveyofapplicants.soa.controller;
 
 import by.bntu.surveyofapplicants.soa.dto.*;
 import by.bntu.surveyofapplicants.soa.service.*;
+import by.bntu.surveyofapplicants.soa.service.impl.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

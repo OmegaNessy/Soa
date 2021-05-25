@@ -1,8 +1,8 @@
 package by.bntu.surveyofapplicants.soa.controller;
 
-import by.bntu.surveyofapplicants.soa.dto.FacultyDto;
 import by.bntu.surveyofapplicants.soa.dto.SpecialtyDto;
 import by.bntu.surveyofapplicants.soa.service.SpecialtyService;
+import by.bntu.surveyofapplicants.soa.service.impl.SpecialtyServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;

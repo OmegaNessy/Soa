@@ -5,13 +5,14 @@ import lombok.Data;
 
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
 import java.util.Set;
 
 @Data
 public class UserDto {
     private Long id;
 
-    @NotEmpty(message = "Логин не может быть пустым")
+    @Size(min = 8,max = 25, message = "Не больше 25 и не меньше 8")
     private String login;
 
     private Set<Role> roles;
@@ -20,22 +21,6 @@ public class UserDto {
     private String password;
 
     private String confirmedPassword;
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getLogin() {
-        return login;
-    }
-
-    public void setLogin(String login) {
-        this.login = login;
-    }
 
     public Set<Role> getRoles() {
         return roles;
