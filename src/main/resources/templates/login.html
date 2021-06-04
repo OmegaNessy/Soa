@@ -1,26 +1,71 @@
 <!DOCTYPE html>
-<html xmlns:sec="http://www.w3.org/1999/xhtml">
+<html xmlns:sec="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
 <head>
+    <title>Log in</title>
+
+    <!-- Meta -->
     <meta charset="utf-8">
-    <title>Log in with your account</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="favicon.ico">
+
+    <!-- FontAwesome JS-->
+    <script defer type="text/javascript" src="/assets/plugins/fontawesome/js/all.min.js"
+            th:src="@{/assets/plugins/fontawesome/js/all.min.js}"></script>
+
+    <!-- App CSS -->
+    <link id="theme-style" rel="stylesheet" type="text/css" href="/assets/css/portal.css">
+
 </head>
 
-<body>
-<div sec:authorize access="isAuthenticated()">
-    <% response.sendRedirect("/"); %>
-</div>
-<div>
-    <form method="POST" action="/login">
-        <h2>Вход в систему</h2>
-        <div>
-            <input name="username" type="text" placeholder="Логин"
-                   autofocus="true"/>
-            <input name="password" type="password" placeholder="Пароль"/>
-            <button type="submit">Войти</button>
-<!--            <h4><a href="/registration">Зарегистрироваться</a></h4>-->
+<body class="app app-signup p-0">
+<div class="row g-0 app-auth-wrapper">
+    <div class="col-12 col-md-7 col-lg-6 auth-main-col text-center p-5">
+        <div class="d-flex flex-column align-content-end">
+            <div class="app-auth-body mx-auto">
+                <div class="app-auth-branding mb-4"><a class="app-logo"><img class="logo-icon mr-2"
+                                                                             src="/assets/images/app-logo.svg"
+                                                                             th:src="@{/assets/images/app-logo.svg}"
+                                                                             alt="logo"></a></div>
+                <h2 class="auth-heading text-center mb-4">Log in to System</h2>
+
+                <div class="auth-form-container text-left mx-auto">
+                    <form class="auth-form" method="POST" action="/login">
+                        <div class="form-group mb-3">
+                            <input name="username" type="text" class="form-control" placeholder="Login"
+                                   required="required">
+                        </div>
+                        <div class="form-group mb-3">
+                            <input name="password" type="password" class="form-control" placeholder="Password"
+                                   required="required">
+                        </div>
+                        <div class="text-center mb-3">
+                            <button type="submit" class="btn app-btn-primary btn-block theme-btn mx-auto">Log in
+                            </button>
+                        </div>
+                    </form><!--//auth-form-->
+
+                </div><!--//auth-form-container-->
+
+
+            </div><!--//auth-body-->
+
+
+        </div><!--//flex-column-->
+    </div><!--//auth-main-col-->
+    <div class="col-12 col-md-5 col-lg-6 h-100 auth-background-col">
+        <div class="auth-background-holder">
         </div>
-    </form>
-</div>
+
+    </div><!--//auth-background-col-->
+
+</div><!--//row-->
+
+
+</body>
+</html>
+
 
 </body>
 </html>

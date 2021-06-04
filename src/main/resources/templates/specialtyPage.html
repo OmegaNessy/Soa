@@ -1,55 +1,331 @@
-<!DOCTYPE HTML>
-<html xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8" />
-    <title>Specialties</title>
-    <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}"/>
-    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet"/>
-    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"/>
-</head>
-<body>
-<table border="1" style="width:300px">
-    <caption><h1>Список специальностей</h1></caption>
-    <tr>
-        <td>Имя</td>
-        <td>Факультет</td>
-        <td>Информация</td>
-        <td>Проходной балл</td>
-        <td>Первый предмет</td>
-        <td>Второй предмет</td>
-        <td>Третий предмет</td>
-    </tr>
-    <th:block th:each="specialty : ${specialtyList}">
-        <tr>
-            <td th:text="${specialty.name}"/>
-            <td th:text="${specialty.facultyName}"/>
-            <td th:text="${specialty.information}"/>
-            <td th:text="${specialty.passingScore}"/>
-            <td th:text="${specialty.firstSubjectName}"/>
-            <td th:text="${specialty.secondSubjectName}"/>
-            <td th:text="${specialty.thirdSubjectName}"/>
-            <td><a  href="/admin/deleteSpecialty" th:href="@{'/admin/deleteSpecialty/' + ${specialty.id}}" class="btn btn-success">
-                <i class="fa fa-arrow-circle-o-left"></i>
-                &nbsp; Удалить
-            </a></td>
-            <td><a th:href="@{'/admin/specialty/add/'+${specialty.id}}" class="btn btn-success">
-                <i class="fa fa-arrow-circle-o-left"></i>
-                &nbsp; Редактировать специальность
-            </a></td>
-        </tr>
-    </th:block>
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
 
-</table>
-<h2>
-    <a href="/" class="btn btn-success">
-        <i class="fa fa-arrow-circle-o-left"></i>
-        &nbsp; Назад на главый экран
-    </a>
-    <a href="/admin/specialty/add" class="btn btn-success">
-        <i class="fa fa-arrow-circle-o-left"></i>
-        &nbsp; Добавить специальность
-    </a>
-</h2>
+<head>
+    <title>ИСТА</title>
+
+    <!-- Meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="favicon.ico">
+
+    <!-- FontAwesome JS-->
+    <script defer src="/assets/plugins/fontawesome/js/all.min.js"></script>
+
+    <!-- App CSS -->
+    <link id="theme-style" rel="stylesheet" href="/assets/css/portal.css">
+
+</head>
+
+<body class="app">
+<header class="app-header fixed-top">
+    <!--//app-header-inner-->
+    <div class="app-header-inner">
+        <div class="container-fluid py-2">
+            <div class="app-header-content">
+                <div class="row justify-content-between align-items-center">
+
+                    <div class="col-auto">
+                        <a id="sidepanel-toggler" class="sidepanel-toggler d-inline-block d-xl-none" href="#">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 30 30"
+                                 role="img">
+                                <title>Menu</title>
+                                <path stroke="currentColor" stroke-linecap="round" stroke-miterlimit="10"
+                                      stroke-width="2" d="M4 7h22M4 15h22M4 23h22"></path>
+                            </svg>
+                        </a>
+                    </div>
+                    <!--//col-->
+                    <!--//col-->
+
+                    <!--//app-search-box-->
+
+
+                </div>
+                <!--//row-->
+            </div>
+            <!--//app-header-content-->
+        </div>
+        <!--//container-fluid-->
+    </div>
+    <div id="app-sidepanel" class="app-sidepanel">
+        <div id="sidepanel-drop" class="sidepanel-drop"></div>
+        <div class="sidepanel-inner d-flex flex-column">
+            <a href="#" id="sidepanel-close" class="sidepanel-close d-xl-none">&times;</a>
+            <div class="app-branding">
+                <a class="app-logo" href="/"><img class="logo-icon mr-2" src="/assets/images/app-logo.svg"
+                                                  alt="logo"><span class="logo-text">BNTU</span></a>
+
+            </div>
+            <!--//app-branding-->
+
+            <nav id="app-nav-main" class="app-nav app-nav-main flex-grow-1">
+                <ul class="app-menu list-unstyled accordion" id="menu-accordion">
+                    <!--//nav-item-->
+                    <li class="nav-item">
+                        <!--//Bootstrap Icons: https://icons.getbootstrap.com/ -->
+                        <a class="nav-link" href="/admin/users">
+								<span class="nav-icon">
+									<svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-card-list"
+                                         fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+										<path fill-rule="evenodd"
+                                              d="M14.5 3h-13a.5.5 0 0 0-.5.5v9a.5.5 0 0 0 .5.5h13a.5.5 0 0 0 .5-.5v-9a.5.5 0 0 0-.5-.5zm-13-1A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h13a1.5 1.5 0 0 0 1.5-1.5v-9A1.5 1.5 0 0 0 14.5 2h-13z" />
+										<path fill-rule="evenodd"
+                                              d="M5 8a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7A.5.5 0 0 1 5 8zm0-2.5a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5zm0 5a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5z" />
+										<circle cx="3.5" cy="5.5" r=".5" />
+										<circle cx="3.5" cy="8" r=".5" />
+										<circle cx="3.5" cy="10.5" r=".5" />
+									</svg>
+								</span>
+                            <span class="nav-link-text">Users</span>
+                        </a>
+                        <!--//nav-link-->
+                    </li>
+                    <!--//nav-item-->
+                    <li class="nav-item">
+                        <!--//Bootstrap Icons: https://icons.getbootstrap.com/ -->
+                        <a class="nav-link" href="/admin/facultyList">
+								<span class="nav-icon">
+									<svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-card-list"
+                                         fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+										<path fill-rule="evenodd"
+                                              d="M14.5 3h-13a.5.5 0 0 0-.5.5v9a.5.5 0 0 0 .5.5h13a.5.5 0 0 0 .5-.5v-9a.5.5 0 0 0-.5-.5zm-13-1A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h13a1.5 1.5 0 0 0 1.5-1.5v-9A1.5 1.5 0 0 0 14.5 2h-13z" />
+										<path fill-rule="evenodd"
+                                              d="M5 8a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7A.5.5 0 0 1 5 8zm0-2.5a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5zm0 5a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5z" />
+										<circle cx="3.5" cy="5.5" r=".5" />
+										<circle cx="3.5" cy="8" r=".5" />
+										<circle cx="3.5" cy="10.5" r=".5" />
+									</svg>
+								</span>
+                            <span class="nav-link-text">Faculties</span>
+                        </a>
+                        <!--//nav-link-->
+                    </li>
+                    <!--//nav-item-->
+                    <li class="nav-item">
+                        <!--//Bootstrap Icons: https://icons.getbootstrap.com/ -->
+                        <a class="nav-link active" href="/admin/specialtyList">
+								<span class="nav-icon">
+									<!--//Bootstrap Icons: https://icons.getbootstrap.com/ -->
+									<svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-card-list"
+                                         fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+										<path fill-rule="evenodd"
+                                              d="M14.5 3h-13a.5.5 0 0 0-.5.5v9a.5.5 0 0 0 .5.5h13a.5.5 0 0 0 .5-.5v-9a.5.5 0 0 0-.5-.5zm-13-1A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h13a1.5 1.5 0 0 0 1.5-1.5v-9A1.5 1.5 0 0 0 14.5 2h-13z" />
+										<path fill-rule="evenodd"
+                                              d="M5 8a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7A.5.5 0 0 1 5 8zm0-2.5a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5zm0 5a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5z" />
+										<circle cx="3.5" cy="5.5" r=".5" />
+										<circle cx="3.5" cy="8" r=".5" />
+										<circle cx="3.5" cy="10.5" r=".5" />
+									</svg>
+								</span>
+                            <span class="nav-link-text">Specialties</span>
+
+                            <!--//submenu-arrow-->
+                        </a>
+                        <!--//nav-link-->
+
+                    </li>
+                    <!--//nav-item-->
+                    <li class="nav-item">
+                        <!--//Bootstrap Icons: https://icons.getbootstrap.com/ -->
+                        <a class="nav-link" href="/admin/test">
+								<span class="nav-icon">
+									<!--//Bootstrap Icons: https://icons.getbootstrap.com/ -->
+									<svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-card-list"
+                                         fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+										<path fill-rule="evenodd"
+                                              d="M14.5 3h-13a.5.5 0 0 0-.5.5v9a.5.5 0 0 0 .5.5h13a.5.5 0 0 0 .5-.5v-9a.5.5 0 0 0-.5-.5zm-13-1A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h13a1.5 1.5 0 0 0 1.5-1.5v-9A1.5 1.5 0 0 0 14.5 2h-13z" />
+										<path fill-rule="evenodd"
+                                              d="M5 8a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7A.5.5 0 0 1 5 8zm0-2.5a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5zm0 5a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5z" />
+										<circle cx="3.5" cy="5.5" r=".5" />
+										<circle cx="3.5" cy="8" r=".5" />
+										<circle cx="3.5" cy="10.5" r=".5" />
+									</svg>
+								</span>
+                            <span class="nav-link-text">Tests</span>
+
+                            <!--//submenu-arrow-->
+                        </a>
+                        <!--//nav-link-->
+                    </li>
+                    <!--//nav-item-->
+
+
+                    <li class="nav-item">
+                        <!--//Bootstrap Icons: https://icons.getbootstrap.com/ -->
+                        <a class="nav-link" href="/user/results">
+								<span class="nav-icon">
+									<svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-card-list"
+                                         fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+										<path fill-rule="evenodd"
+                                              d="M14.5 3h-13a.5.5 0 0 0-.5.5v9a.5.5 0 0 0 .5.5h13a.5.5 0 0 0 .5-.5v-9a.5.5 0 0 0-.5-.5zm-13-1A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h13a1.5 1.5 0 0 0 1.5-1.5v-9A1.5 1.5 0 0 0 14.5 2h-13z" />
+										<path fill-rule="evenodd"
+                                              d="M5 8a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7A.5.5 0 0 1 5 8zm0-2.5a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5zm0 5a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5z" />
+										<circle cx="3.5" cy="5.5" r=".5" />
+										<circle cx="3.5" cy="8" r=".5" />
+										<circle cx="3.5" cy="10.5" r=".5" />
+									</svg>
+								</span>
+                            <span class="nav-link-text">Test Results</span>
+                        </a>
+                        <!--//nav-link-->
+                    </li>
+                    <!--//nav-item-->
+
+                    <li class="nav-item">
+                        <!--//Bootstrap Icons: https://icons.getbootstrap.com/ -->
+                        <a class="nav-link" href="/registration">
+								<span class="nav-icon">
+									<svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-card-list"
+                                         fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+										<path fill-rule="evenodd"
+                                              d="M14.5 3h-13a.5.5 0 0 0-.5.5v9a.5.5 0 0 0 .5.5h13a.5.5 0 0 0 .5-.5v-9a.5.5 0 0 0-.5-.5zm-13-1A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h13a1.5 1.5 0 0 0 1.5-1.5v-9A1.5 1.5 0 0 0 14.5 2h-13z" />
+										<path fill-rule="evenodd"
+                                              d="M5 8a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7A.5.5 0 0 1 5 8zm0-2.5a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5zm0 5a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5z" />
+										<circle cx="3.5" cy="5.5" r=".5" />
+										<circle cx="3.5" cy="8" r=".5" />
+										<circle cx="3.5" cy="10.5" r=".5" />
+									</svg>
+								</span>
+                            <span class="nav-link-text">Register new user</span>
+                        </a>
+                        <!--//nav-link-->
+                    </li>
+                    <!--//nav-item-->
+                </ul>
+                <!--//app-menu-->
+            </nav>
+            <!--//app-nav-->
+            <div class="app-sidepanel-footer">
+                <nav class="app-nav app-nav-footer">
+                    <ul class="app-menu footer-menu list-unstyled">
+
+                        <!--//nav-item-->
+                        <li class="nav-item">
+                            <!--//Bootstrap Icons: https://icons.getbootstrap.com/ -->
+                            <a class="nav-link"
+                               href="/logout">
+									<span class="nav-icon">
+										<svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-download"
+                                             fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+											<!-- <path fill-rule="evenodd"
+												d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z" /> -->
+											<path fill-rule="evenodd"
+                                                  d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z" />
+										</svg>
+									</span>
+                                <span class="nav-link-text">Log Out</span>
+                            </a>
+                            <!--//nav-link-->
+                        </li>
+                        <!--//nav-item-->
+
+                        <!--//nav-item-->
+                    </ul>
+                    <!--//footer-menu-->
+                </nav>
+            </div>
+            <!--//app-sidepanel-footer-->
+
+        </div>
+        <!--//sidepanel-inner-->
+    </div>
+    <!--//app-sidepanel-->
+</header>
+<!--//app-header-->
+
+<div class="app-wrapper">
+
+    <div class="app-content pt-3 p-md-3 p-lg-4">
+        <div class="container-xl">
+
+            <div class="row g-3 mb-4 align-items-center justify-content-between">
+                <div class="col-auto">
+                    <h1 class="app-page-title mb-0">Specialties	</h1>
+                </div>
+                <div class="col-auto">
+                    <a class="btn app-btn-secondary" href="/admin/specialty/add">
+                        Add new
+                    </a>
+                </div>
+
+                <!--//col-auto-->
+            </div>
+            <!--//row-->
+            <div class="tab-content">
+                <div class="tab-pane fade show active"  role="tabpanel">
+                    <div class="app-card app-card-tables-table shadow-sm mb-5">
+                        <div class="app-card-body">
+                            <div class="table-responsive">
+                                <table class="table app-table-hover mb-0 text-left">
+                                    <thead>
+                                    <tr>
+                                        <th class="cell">Specialty Name</th>
+                                        <th class="cell">Faculty</th>
+                                        <th class="cell">Information</th>
+                                        <th class="cell">Passing score</th>
+                                        <th class="cell">First subject</th>
+                                        <th class="cell">Second subject</th>
+                                        <th class="cell">Third subject</th>
+                                        <th class="cell">Actions</th>
+                                        <th class="cell"></th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr th:each="specialty : ${specialtyList}">
+                                        <td class="cell" th:text="${specialty.name}"/>
+                                        <td class="cell" th:text="${specialty.facultyName}"/>
+                                        <td class="cell truncate" th:text="${specialty.information}"/>
+                                        <td class="cell" th:text="${specialty.passingScore}"/>
+                                        <td class="cell" th:text="${specialty.firstSubjectName}"/>
+                                        <td class="cell" th:text="${specialty.secondSubjectName}"/>
+                                        <td class="cell" th:text="${specialty.thirdSubjectName}"/>
+                                        <td class="cell"><a class="btn-sm app-btn-secondary bg-danger" th:href="@{'/admin/deleteSpecialty/' + ${specialty.id}}" style="color: white; font-weight: bold;">Delete</a>
+                                        <td class="cell"><a class="btn-sm app-btn-secondary bg-success" th:href="@{'/admin/specialty/add/'+${specialty.id}}" style="color: white; font-weight: bold;">Edit</a>
+                                        </td>
+                                    </tr>
+
+
+                                    </tbody>
+                                </table>
+                            </div>
+                            <!--//table-responsive-->
+
+                        </div>
+                        <!--//app-card-body-->
+                    </div>
+                    <!--//app-card-->
+
+                    <!--//app-pagination-->
+
+                </div>
+                <!--//tab-pane-->
+
+                <!--//tab-pane-->
+            </div>
+            <!--//tab-content-->
+
+
+
+        </div>
+        <!--//container-fluid-->
+    </div>
+    <!--//app-content-->
+
+
+    <!--//app-footer-->
+
+</div>
+<!--//app-wrapper-->
+<!-- Javascript -->
+<script src="/assets/plugins/popper.min.js"></script>
+<script src="/assets/plugins/bootstrap/js/bootstrap.min.js"></script>
+
+
+<!-- Page Specific JS -->
+<script src="/assets/js/app.js"></script>
+
 </body>
 
 </html>

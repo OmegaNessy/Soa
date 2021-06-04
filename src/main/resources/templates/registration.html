@@ -1,42 +1,97 @@
+<!--    <form th:action="@{/registration}" th:object="${userForm}" method="post">-->
+
+<!--&lt;!&ndash;    <form method="POST" th:modelAttribute="userForm">&ndash;&gt;-->
+<!--        <h2>Регистрация</h2>-->
+<!--        <div>-->
+<!--            <label>Login</label>-->
+<!--            <label>-->
+<!--                <input type="text" th:field="*{login}">-->
+<!--            </label>-->
+<!--            <span th:if="${#fields.hasErrors('login')}"  th:errors="*{login}">Error</span>-->
+<!--            <span th:if="${usernameError}"  th:text="${usernameError}">Error</span>-->
+
+<!--        </div>-->
+<!--        <div>-->
+<!--            <label>Password</label>-->
+<!--            <label>-->
+<!--                <input type="text" th:field="*{password}">-->
+<!--            </label>-->
+<!--            <span th:if="${#fields.hasErrors('password')}"  th:errors="*{password}">Error</span>-->
+<!--        </div>-->
+<!--        <div>-->
+<!--            <label>PasswordConfirm</label>-->
+<!--            <label>-->
+<!--                <input type="text" th:field="*{confirmedPassword}">-->
+<!--            </label>-->
+<!--            <span th:if="${passwordError}"  th:text="${passwordError}">Error</span>-->
+<!--        </div>-->
+<!--        <button type="submit">Зарегистрировать</button>-->
+<!--    </form>-->
+
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
 <head>
+    <title>Registration</title>
+
+    <!-- Meta -->
     <meta charset="utf-8">
-    <title>Регистрация</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="favicon.ico">
+
+    <!-- FontAwesome JS-->
+    <script defer src="assets/plugins/fontawesome/js/all.min.js"></script>
+
+    <!-- App CSS -->
+    <link id="theme-style" rel="stylesheet" href="assets/css/portal.css">
+
 </head>
 
-<body>
-<div>
-    <form th:action="@{/registration}" th:object="${userForm}" method="post">
+<body class="app app-signup p-0">
+<div class="row g-0 app-auth-wrapper">
+    <div class="col-12 col-md-7 col-lg-6 auth-main-col text-center p-5">
+        <div class="d-flex flex-column align-content-end">
+            <div class="app-auth-body mx-auto">
+                <div class="app-auth-branding mb-4"><a class="app-logo" href="index.html"><img class="logo-icon mr-2" src="assets/images/app-logo.svg" alt="logo"></a></div>
+                <h2 class="auth-heading text-center mb-4">Sign up new User</h2>
 
-<!--    <form method="POST" th:modelAttribute="userForm">-->
-        <h2>Регистрация</h2>
-        <div>
-            <label>Login</label>
-            <label>
-                <input type="text" th:field="*{login}">
-            </label>
-            <span th:if="${#fields.hasErrors('login')}"  th:errors="*{login}">Error</span>
-            <span th:if="${usernameError}"  th:text="${usernameError}">Error</span>
+                <div class="auth-form-container text-left mx-auto">
+                    <form class="auth-form auth-signup-form" th:action="@{/registration}" th:object="${userForm}" method="post">
+                        <div class="form-group mb-3">
+                            <input  type="text" name="login" class="form-control signup-name" placeholder="Login" required="required">
+                        </div>
+                        <div class="form-group mb-3">
+                            <input  type="password" name="password" class="form-control auth-signup-form" placeholder="Password" required="required">
+                        </div>
+                        <div class="form-group mb-3">
+                            <input  type="password" name="confirmedPassword" class="form-control auth-signup-form" placeholder="Confirm password" required="required">
+                        </div>
+                        <div class="text-center mb-3">
+                            <button type="submit" class="btn app-btn-primary btn-block theme-btn mx-auto">Sign Up</button>
+                        </div>
+                        <div class="text-center mb-3">
+                            <button onclick="history.back()" class="btn app-btn-primary btn-block theme-btn mx-auto">Back</button>
+                        </div>
+                    </form><!--//auth-form-->
 
+                </div><!--//auth-form-container-->
+
+
+
+            </div><!--//auth-body-->
+
+
+        </div><!--//flex-column-->
+    </div><!--//auth-main-col-->
+    <div class="col-12 col-md-5 col-lg-6 h-100 auth-background-col">
+        <div class="auth-background-holder">
         </div>
-        <div>
-            <label>Password</label>
-            <label>
-                <input type="text" th:field="*{password}">
-            </label>
-            <span th:if="${#fields.hasErrors('password')}"  th:errors="*{password}">Error</span>
-        </div>
-        <div>
-            <label>PasswordConfirm</label>
-            <label>
-                <input type="text" th:field="*{confirmedPassword}">
-            </label>
-            <span th:if="${passwordError}"  th:text="${passwordError}">Error</span>
-        </div>
-        <button type="submit">Зарегистрировать</button>
-    </form>
-    <h3><a href="/">Главная</a></h3>
-</div>
+
+    </div><!--//auth-background-col-->
+
+</div><!--//row-->
+
+
 </body>
 </html>
+

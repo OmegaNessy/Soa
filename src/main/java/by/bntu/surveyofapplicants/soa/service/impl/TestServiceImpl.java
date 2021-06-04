@@ -114,6 +114,7 @@ public class TestServiceImpl implements TestService {
     public void deleteTest(Long id){
         testRepository.deleteById(id);
     }
+
     private String calculateResult(List<Long> answersIdList){
         Map<String,Integer> resultMap = new HashMap<>();
         int fullScore = 0;

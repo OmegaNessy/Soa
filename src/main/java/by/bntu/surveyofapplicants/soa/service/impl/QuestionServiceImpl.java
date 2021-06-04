@@ -40,5 +40,4 @@ public class QuestionServiceImpl implements QuestionService {
     public QuestionDto getQuestionById(Long id){
         return mapper.toDto(questionRepository.findById(id).orElseThrow(NullPointerException::new));
     }
-
 }

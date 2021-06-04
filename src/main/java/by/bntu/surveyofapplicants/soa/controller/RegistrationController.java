@@ -41,6 +41,6 @@ public class RegistrationController {
             return REGISTRATION_PAGE;
         }
 
-        return "redirect:/";
+        return "redirect:/admin/users";
     }
 }

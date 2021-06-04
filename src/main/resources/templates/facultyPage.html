@@ -1,56 +1,228 @@
-<!DOCTYPE HTML>
+<!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" lang="">
 <head>
-    <meta charset="UTF-8" />
-    <title>Faculties</title>
-    <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}"/>
-    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet"/>
-    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"/>
+    <title>ИСТА</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="favicon.ico">
+    <script src="/assets/plugins/fontawesome/js/all.min.js"></script>
+    <link id="theme-style" rel="stylesheet" href="/assets/css/portal.css">
 </head>
-<body>
-<table border="1" style="width:300px">
-    <caption><h2>Список факультетов</h2></caption>
-    <tr>
-        <th>Имя</th>
-        <th>Краткая информация</th>
-        <th>Полная информация</th>
-        <th>Корпус</th>
-        <th>Рейтинг факультета</th>
-        <th>Рейтинг общежития</th>
-        <th>Рейтинг студсовета</th>
-        <th>Рейтинг обучения</th>
-
-    </tr>
-    <th:block th:each="faculty : ${facultyList}">
-        <tr>
-            <td th:text="${faculty.name}"/>
-            <td th:text="${faculty.shortInformation}"/>
-            <td th:text="${faculty.information}"/>
-            <td th:text="${faculty.campus}"/>
-            <td th:text="${faculty.facultyRating}"/>
-            <td th:text="${faculty.hostelRating}"/>
-            <td th:text="${faculty.studentAssetRating}"/>
-            <td th:text="${faculty.studyRating}"/>
-            <td><a  href="/admin/deleteFaculty" th:href="@{'/admin/deleteFaculty/' + ${faculty.id}}" class="btn btn-success">
-                <em class="fa fa-arrow-circle-o-left"></em>
-                &nbsp; Удалить
-            </a></td>
-            <td><a th:href="@{'/admin/faculty/edit/' + ${faculty.id}}" class="btn btn-success">
-                <em class="fa fa-arrow-circle-o-left"></em>
-                &nbsp; Редактировать
-            </a></td>
-        </tr>
-    </th:block>
-
-</table>
-<a href="/" class="btn btn-success">
-    <em class="fa fa-arrow-circle-o-left"></em>
-    &nbsp; Назад на главый экран
-</a>
-<a th:href="@{'/admin/faculty/edit'}" class="btn btn-success">
-    <em class="fa fa-arrow-circle-o-left"></em>
-    &nbsp; Добавить факультет
-</a>
+<body class="app">
+<header class="app-header fixed-top">
+    <div class="app-header-inner">
+        <div class="container-fluid py-2">
+            <div class="app-header-content">
+                <div class="row justify-content-between align-items-center">
+                    <div class="col-auto">
+                        <a id="sidepanel-toggler" class="sidepanel-toggler d-inline-block d-xl-none" href="#">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 30 30"
+                                 role="img">
+                                <title>Menu</title>
+                                <path stroke="currentColor" stroke-linecap="round" stroke-miterlimit="10"
+                                      stroke-width="2" d="M4 7h22M4 15h22M4 23h22"></path>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="app-sidepanel" class="app-sidepanel">
+        <div id="sidepanel-drop" class="sidepanel-drop"></div>
+        <div class="sidepanel-inner d-flex flex-column">
+            <a href="#" id="sidepanel-close" class="sidepanel-close d-xl-none">&times;</a>
+            <div class="app-branding">
+                <a class="app-logo"><img class="logo-icon mr-2" src="/assets/images/app-logo.svg"
+                                         th:src="@{/assets/images/app-logo.svg}" alt="logo"><span class="logo-text">BNTU</span></a>
+            </div>
+            <nav id="app-nav-main" class="app-nav app-nav-main flex-grow-1">
+                <ul class="app-menu list-unstyled accordion" id="menu-accordion">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/admin/users">
+								<span class="nav-icon">
+									<svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-card-list"
+                                         fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+										<path fill-rule="evenodd"
+                                              d="M14.5 3h-13a.5.5 0 0 0-.5.5v9a.5.5 0 0 0 .5.5h13a.5.5 0 0 0 .5-.5v-9a.5.5 0 0 0-.5-.5zm-13-1A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h13a1.5 1.5 0 0 0 1.5-1.5v-9A1.5 1.5 0 0 0 14.5 2h-13z" />
+										<path fill-rule="evenodd"
+                                              d="M5 8a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7A.5.5 0 0 1 5 8zm0-2.5a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5zm0 5a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5z" />
+										<circle cx="3.5" cy="5.5" r=".5" />
+										<circle cx="3.5" cy="8" r=".5" />
+										<circle cx="3.5" cy="10.5" r=".5" />
+									</svg>
+								</span>
+                            <span class="nav-link-text">Users</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="/admin/facultyList">
+								<span class="nav-icon">
+									<svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-card-list"
+                                         fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+										<path fill-rule="evenodd"
+                                              d="M14.5 3h-13a.5.5 0 0 0-.5.5v9a.5.5 0 0 0 .5.5h13a.5.5 0 0 0 .5-.5v-9a.5.5 0 0 0-.5-.5zm-13-1A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h13a1.5 1.5 0 0 0 1.5-1.5v-9A1.5 1.5 0 0 0 14.5 2h-13z" />
+										<path fill-rule="evenodd"
+                                              d="M5 8a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7A.5.5 0 0 1 5 8zm0-2.5a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5zm0 5a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5z" />
+										<circle cx="3.5" cy="5.5" r=".5" />
+										<circle cx="3.5" cy="8" r=".5" />
+										<circle cx="3.5" cy="10.5" r=".5" />
+									</svg>
+								</span>
+                            <span class="nav-link-text">Faculties</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/admin/specialtyList">
+								<span class="nav-icon">
+									<svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-card-list"
+                                         fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+										<path fill-rule="evenodd"
+                                              d="M14.5 3h-13a.5.5 0 0 0-.5.5v9a.5.5 0 0 0 .5.5h13a.5.5 0 0 0 .5-.5v-9a.5.5 0 0 0-.5-.5zm-13-1A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h13a1.5 1.5 0 0 0 1.5-1.5v-9A1.5 1.5 0 0 0 14.5 2h-13z" />
+										<path fill-rule="evenodd"
+                                              d="M5 8a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7A.5.5 0 0 1 5 8zm0-2.5a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5zm0 5a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5z" />
+										<circle cx="3.5" cy="5.5" r=".5" />
+										<circle cx="3.5" cy="8" r=".5" />
+										<circle cx="3.5" cy="10.5" r=".5" />
+									</svg>
+								</span>
+                            <span class="nav-link-text">Specialties</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link " href="/admin/test">
+								<span class="nav-icon">
+									<svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-card-list"
+                                         fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+										<path fill-rule="evenodd"
+                                              d="M14.5 3h-13a.5.5 0 0 0-.5.5v9a.5.5 0 0 0 .5.5h13a.5.5 0 0 0 .5-.5v-9a.5.5 0 0 0-.5-.5zm-13-1A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h13a1.5 1.5 0 0 0 1.5-1.5v-9A1.5 1.5 0 0 0 14.5 2h-13z" />
+										<path fill-rule="evenodd"
+                                              d="M5 8a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7A.5.5 0 0 1 5 8zm0-2.5a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5zm0 5a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5z" />
+										<circle cx="3.5" cy="5.5" r=".5" />
+										<circle cx="3.5" cy="8" r=".5" />
+										<circle cx="3.5" cy="10.5" r=".5" />
+									</svg>
+								</span>
+                            <span class="nav-link-text">Tests</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/user/results">
+								<span class="nav-icon">
+									<svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-card-list"
+                                         fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+										<path fill-rule="evenodd"
+                                              d="M14.5 3h-13a.5.5 0 0 0-.5.5v9a.5.5 0 0 0 .5.5h13a.5.5 0 0 0 .5-.5v-9a.5.5 0 0 0-.5-.5zm-13-1A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h13a1.5 1.5 0 0 0 1.5-1.5v-9A1.5 1.5 0 0 0 14.5 2h-13z" />
+										<path fill-rule="evenodd"
+                                              d="M5 8a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7A.5.5 0 0 1 5 8zm0-2.5a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5zm0 5a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5z" />
+										<circle cx="3.5" cy="5.5" r=".5" />
+										<circle cx="3.5" cy="8" r=".5" />
+										<circle cx="3.5" cy="10.5" r=".5" />
+									</svg>
+								</span>
+                            <span class="nav-link-text">Test Results</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/registration">
+								<span class="nav-icon">
+									<svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-card-list"
+                                         fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+										<path fill-rule="evenodd"
+                                              d="M14.5 3h-13a.5.5 0 0 0-.5.5v9a.5.5 0 0 0 .5.5h13a.5.5 0 0 0 .5-.5v-9a.5.5 0 0 0-.5-.5zm-13-1A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h13a1.5 1.5 0 0 0 1.5-1.5v-9A1.5 1.5 0 0 0 14.5 2h-13z" />
+										<path fill-rule="evenodd"
+                                              d="M5 8a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7A.5.5 0 0 1 5 8zm0-2.5a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5zm0 5a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5z" />
+										<circle cx="3.5" cy="5.5" r=".5" />
+										<circle cx="3.5" cy="8" r=".5" />
+										<circle cx="3.5" cy="10.5" r=".5" />
+									</svg>
+								</span>
+                            <span class="nav-link-text">Register new user</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+            <div class="app-sidepanel-footer">
+                <nav class="app-nav app-nav-footer">
+                    <ul class="app-menu footer-menu list-unstyled">
+                        <li class="nav-item">
+                            <a class="nav-link" href="/logout">
+									<span class="nav-icon">
+										<svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-download"
+                                             fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+											<path fill-rule="evenodd"
+                                                  d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z" />
+										</svg>
+									</span>
+                                <span class="nav-link-text">Log Out</span>
+                            </a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </div>
+</header>
+<div class="app-wrapper">
+    <div class="app-content pt-3 p-md-3 p-lg-4">
+        <div class="container-xl">
+            <div class="row g-3 mb-4 align-items-center justify-content-between">
+                <div class="col-auto">
+                    <h1 class="app-page-title mb-0">Faculties</h1>
+                </div>
+                <div class="col-auto">
+                    <a class="btn app-btn-secondary" th:href="@{'/admin/faculty/edit'}">
+                        Add new
+                    </a>
+                </div>
+            </div>
+            <div class="tab-content" >
+                <div class="tab-pane fade show active" role="tabpanel">
+                    <div class="app-card app-card-tables-table shadow-sm mb-5">
+                        <div class="app-card-body">
+                            <div class="table-responsive">
+                                <table class="table app-table-hover mb-0 text-left">
+                                    <thead>
+                                    <tr>
+                                        <th class="cell">Faculty Name</th>
+                                        <th class="cell">Short Information</th>
+                                        <th class="cell">Full information</th>
+                                        <th class="cell">Campus</th>
+                                        <th class="cell">Faculty rating</th>
+                                        <th class="cell">Hostel rating</th>
+                                        <th class="cell">Student Asset rating</th>
+                                        <th class="cell">Study rating</th>
+                                        <th class="cell">Actions</th>
+                                        <th class="cell"></th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr th:each="faculty : ${facultyList}">
+                                        <td class="cell" th:text="${faculty.name}"/>
+                                        <td class="cell" th:text="${faculty.shortInformation}"/>
+                                        <td class="cell truncate" th:text="${faculty.information}"/>
+                                        <td class="cell" th:text="${faculty.campus}"/>
+                                        <td class="cell" th:text="${faculty.facultyRating}"/>
+                                        <td class="cell" th:text="${faculty.hostelRating}"/>
+                                        <td class="cell" th:text="${faculty.studentAssetRating}"/>
+                                        <td class="cell" th:text="${faculty.studyRating}"/>
+                                        <td class="cell"><a class="btn-sm app-btn-secondary bg-danger" th:href="@{'/admin/deleteFaculty/' + ${faculty.id}}" style="color: white; font-weight: bold;">Delete</a>
+                                        <td class="cell"><a class="btn-sm app-btn-secondary bg-success" th:href="@{'/admin/faculty/edit/' + ${faculty.id}}" style="color: white; font-weight: bold;">Edit</a>
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="/assets/plugins/popper.min.js"></script>
+<script src="/assets/plugins/bootstrap/js/bootstrap.min.js"></script>
+<script src="/assets/js/app.js"></script>
 </body>
-
 </html>

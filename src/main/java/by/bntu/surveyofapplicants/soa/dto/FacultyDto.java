@@ -38,10 +38,10 @@ public class FacultyDto {
     private String campus;
 
     @NonNull
-    @Size(min = 50, max = 2048, message = "Должно содержать от 50 до 2048 символов")
+    @Size(min = 50, max = 4000, message = "Должно содержать от 50 до 2048 символов")
     private String information;
 
     @NonNull
-    @Size(min = 10, max = 50, message = "Должно содержать от 10 до 50 символов")
+    @Size(min = 10, max = 100, message = "Должно содержать от 10 до 50 символов")
     private String shortInformation;
 }

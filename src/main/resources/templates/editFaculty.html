@@ -1,79 +1,355 @@
-<!DOCTYPE HTML>
-<html xmlns:th="http://www.thymeleaf.org" lang="">
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+
 <head>
-    <meta charset="UTF-8"/>
-    <title>Edit Question</title>
-    <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}"/>
-    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet"/>
-    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"/>
+    <title>ИСТА</title>
+
+    <!-- Meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="favicon.ico">
+
+    <!-- FontAwesome JS-->
+    <script defer type="text/javascript" src="/assets/plugins/fontawesome/js/all.min.js"
+            th:src="@{/assets/plugins/fontawesome/js/all.min.js}"></script>
+
+    <!-- App CSS -->
+    <link id="theme-style" rel="stylesheet" href="/assets/css/portal.css">
+
 </head>
-<body>
-<form action="/admin/faculty/edit" th:object="${faculty}" method="post">
-    <table>
-        <caption><h2>Редактирование списка факультетов</h2></caption>
-        <tr>
-            <td>Название:</td>
-            <td><input type="text" name="name" th:value="*{name}"/></td>
-            <td th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Name Error</td>
-            <span th:if="${facultyError}"  th:text="${facultyError}">Error</span>
-        </tr>
-        <tr>
-            <td>Краткая информация:</td>
-            <td><input type="text" name="shortInformation" th:value="*{shortInformation}"/></td>
-            <td th:if="${#fields.hasErrors('shortInformation')}" th:errors="*{shortInformation}">ShortInformation Error</td>
-        </tr>
-        <tr>
-            <td>Полная информация:</td>
-            <td><input type="text" name="information" th:value="*{information}"/></td>
-            <td th:if="${#fields.hasErrors('information')}" th:errors="*{information}">Information Error</td>
-        </tr>
-        <tr>
-            <td>Рейтинг факультета:</td>
-            <td><input type="text" name="facultyRating" th:value="*{facultyRating}"/></td>
-            <td th:if="${#fields.hasErrors('facultyRating')}" th:errors="*{facultyRating}">FacultyRating Error</td>
 
-        </tr>
-        <tr>
-            <td>Рейтинг общежития:</td>
-            <td><input type="text" name="hostelRating" th:value="*{hostelRating}"/></td>
-            <td th:if="${#fields.hasErrors('hostelRating')}" th:errors="*{hostelRating}">HostelRating Error</td>
+<body class="app">
+<header class="app-header fixed-top">
+    <!--//app-header-inner-->
+    <div class="app-header-inner">
+        <div class="container-fluid py-2">
+            <div class="app-header-content">
+                <div class="row justify-content-between align-items-center">
 
-        </tr>
-        <tr>
-            <td>Рейтинг студсовета:</td>
-            <td><input type="text" name="studentAssetRating" th:value="*{studentAssetRating}"/></td>
-            <td th:if="${#fields.hasErrors('studentAssetRating')}" th:errors="*{studentAssetRating}">StudentAssetRating Error</td>
+                    <div class="col-auto">
+                        <a id="sidepanel-toggler" class="sidepanel-toggler d-inline-block d-xl-none" href="#">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 30 30"
+                                 role="img">
+                                <title>Menu</title>
+                                <path stroke="currentColor" stroke-linecap="round" stroke-miterlimit="10"
+                                      stroke-width="2" d="M4 7h22M4 15h22M4 23h22"></path>
+                            </svg>
+                        </a>
+                    </div>
+                    <!--//col-->
+                    <!--//col-->
 
-        </tr>
-        <tr>
-            <td>Рейтинг обучающего процесса:</td>
-            <td><input type="text" name="studyRating" th:value="*{studyRating}"/></td>
-            <td th:if="${#fields.hasErrors('studyRating')}" th:errors="*{studyRating}">StudyRating Error</td>
+                    <!--//app-search-box-->
 
-        </tr>
-        <tr>
-            <td>Номер корпуса факультета:</td>
-            <td><input type="text" name="campus" th:value="*{campus}"/></td>
-            <td th:if="${#fields.hasErrors('campus')}" th:errors="*{campus}">Campus Error</td>
 
-        </tr>
-        <tr>
-            <td><input type="hidden" name="id" th:value="${faculty.id}"></td>
-        </tr>
-        <tr>
-            <td>
-                <input type="submit" value="Обновить список" class="btn btn-success">
-            </td>
-        </tr>
-        <tr>
-            <td><a  href="/admin/facultyList" class="btn btn-success">
-                <em class="fa fa-arrow-circle-o-left"></em>
-                &nbsp; Назад
-            </a></td>
-        </tr>
-    </table>
+                </div>
+                <!--//row-->
+            </div>
+            <!--//app-header-content-->
+        </div>
+        <!--//container-fluid-->
+    </div>
+    <div id="app-sidepanel" class="app-sidepanel">
+        <div id="sidepanel-drop" class="sidepanel-drop"></div>
+        <div class="sidepanel-inner d-flex flex-column">
+            <a href="#" id="sidepanel-close" class="sidepanel-close d-xl-none">&times;</a>
+            <div class="app-branding">
+                <a class="app-logo"><img class="logo-icon mr-2" src="/assets/images/app-logo.svg"
+                                         th:src="@{/assets/images/app-logo.svg}" alt="logo"><span class="logo-text">BNTU</span></a>
 
-</form>
+            </div>
+            <!--//app-branding-->
+
+            <nav id="app-nav-main" class="app-nav app-nav-main flex-grow-1">
+                <ul class="app-menu list-unstyled accordion" id="menu-accordion">
+                    <!--//nav-item-->
+                    <li class="nav-item">
+                        <!--//Bootstrap Icons: https://icons.getbootstrap.com/ -->
+                        <a class="nav-link" href="/admin/users">
+								<span class="nav-icon">
+									<svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-card-list"
+                                         fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+										<path fill-rule="evenodd"
+                                              d="M14.5 3h-13a.5.5 0 0 0-.5.5v9a.5.5 0 0 0 .5.5h13a.5.5 0 0 0 .5-.5v-9a.5.5 0 0 0-.5-.5zm-13-1A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h13a1.5 1.5 0 0 0 1.5-1.5v-9A1.5 1.5 0 0 0 14.5 2h-13z" />
+										<path fill-rule="evenodd"
+                                              d="M5 8a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7A.5.5 0 0 1 5 8zm0-2.5a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5zm0 5a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5z" />
+										<circle cx="3.5" cy="5.5" r=".5" />
+										<circle cx="3.5" cy="8" r=".5" />
+										<circle cx="3.5" cy="10.5" r=".5" />
+									</svg>
+								</span>
+                            <span class="nav-link-text">Users</span>
+                        </a>
+                        <!--//nav-link-->
+                    </li>
+                    <!--//nav-item-->
+                    <li class="nav-item">
+                        <!--//Bootstrap Icons: https://icons.getbootstrap.com/ -->
+                        <a class="nav-link" href="/admin/facultyList">
+								<span class="nav-icon">
+									<svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-card-list"
+                                         fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+										<path fill-rule="evenodd"
+                                              d="M14.5 3h-13a.5.5 0 0 0-.5.5v9a.5.5 0 0 0 .5.5h13a.5.5 0 0 0 .5-.5v-9a.5.5 0 0 0-.5-.5zm-13-1A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h13a1.5 1.5 0 0 0 1.5-1.5v-9A1.5 1.5 0 0 0 14.5 2h-13z" />
+										<path fill-rule="evenodd"
+                                              d="M5 8a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7A.5.5 0 0 1 5 8zm0-2.5a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5zm0 5a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5z" />
+										<circle cx="3.5" cy="5.5" r=".5" />
+										<circle cx="3.5" cy="8" r=".5" />
+										<circle cx="3.5" cy="10.5" r=".5" />
+									</svg>
+								</span>
+                            <span class="nav-link-text">Faculties</span>
+                        </a>
+                        <!--//nav-link-->
+                    </li>
+                    <!--//nav-item-->
+                    <li class="nav-item">
+                        <!--//Bootstrap Icons: https://icons.getbootstrap.com/ -->
+                        <a class="nav-link" href="/admin/specialtyList">
+								<span class="nav-icon">
+									<!--//Bootstrap Icons: https://icons.getbootstrap.com/ -->
+									<svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-card-list"
+                                         fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+										<path fill-rule="evenodd"
+                                              d="M14.5 3h-13a.5.5 0 0 0-.5.5v9a.5.5 0 0 0 .5.5h13a.5.5 0 0 0 .5-.5v-9a.5.5 0 0 0-.5-.5zm-13-1A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h13a1.5 1.5 0 0 0 1.5-1.5v-9A1.5 1.5 0 0 0 14.5 2h-13z" />
+										<path fill-rule="evenodd"
+                                              d="M5 8a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7A.5.5 0 0 1 5 8zm0-2.5a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5zm0 5a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5z" />
+										<circle cx="3.5" cy="5.5" r=".5" />
+										<circle cx="3.5" cy="8" r=".5" />
+										<circle cx="3.5" cy="10.5" r=".5" />
+									</svg>
+								</span>
+                            <span class="nav-link-text">Specialties</span>
+
+                            <!--//submenu-arrow-->
+                        </a>
+                        <!--//nav-link-->
+
+                    </li>
+                    <!--//nav-item-->
+                    <li class="nav-item">
+                        <!--//Bootstrap Icons: https://icons.getbootstrap.com/ -->
+                        <a class="nav-link " href="/admin/test">
+								<span class="nav-icon">
+									<!--//Bootstrap Icons: https://icons.getbootstrap.com/ -->
+									<svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-card-list"
+                                         fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+										<path fill-rule="evenodd"
+                                              d="M14.5 3h-13a.5.5 0 0 0-.5.5v9a.5.5 0 0 0 .5.5h13a.5.5 0 0 0 .5-.5v-9a.5.5 0 0 0-.5-.5zm-13-1A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h13a1.5 1.5 0 0 0 1.5-1.5v-9A1.5 1.5 0 0 0 14.5 2h-13z" />
+										<path fill-rule="evenodd"
+                                              d="M5 8a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7A.5.5 0 0 1 5 8zm0-2.5a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5zm0 5a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5z" />
+										<circle cx="3.5" cy="5.5" r=".5" />
+										<circle cx="3.5" cy="8" r=".5" />
+										<circle cx="3.5" cy="10.5" r=".5" />
+									</svg>
+								</span>
+                            <span class="nav-link-text">Tests</span>
+
+                            <!--//submenu-arrow-->
+                        </a>
+                        <!--//nav-link-->
+                    </li>
+                    <!--//nav-item-->
+
+
+                    <li class="nav-item">
+                        <!--//Bootstrap Icons: https://icons.getbootstrap.com/ -->
+                        <a class="nav-link" href="/user/results">
+								<span class="nav-icon">
+									<svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-card-list"
+                                         fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+										<path fill-rule="evenodd"
+                                              d="M14.5 3h-13a.5.5 0 0 0-.5.5v9a.5.5 0 0 0 .5.5h13a.5.5 0 0 0 .5-.5v-9a.5.5 0 0 0-.5-.5zm-13-1A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h13a1.5 1.5 0 0 0 1.5-1.5v-9A1.5 1.5 0 0 0 14.5 2h-13z" />
+										<path fill-rule="evenodd"
+                                              d="M5 8a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7A.5.5 0 0 1 5 8zm0-2.5a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5zm0 5a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5z" />
+										<circle cx="3.5" cy="5.5" r=".5" />
+										<circle cx="3.5" cy="8" r=".5" />
+										<circle cx="3.5" cy="10.5" r=".5" />
+									</svg>
+								</span>
+                            <span class="nav-link-text">Test Results</span>
+                        </a>
+                        <!--//nav-link-->
+                    </li>
+                    <!--//nav-item-->
+
+                    <li class="nav-item">
+                        <!--//Bootstrap Icons: https://icons.getbootstrap.com/ -->
+                        <a class="nav-link" href="/registration">
+								<span class="nav-icon">
+									<svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-card-list"
+                                         fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+										<path fill-rule="evenodd"
+                                              d="M14.5 3h-13a.5.5 0 0 0-.5.5v9a.5.5 0 0 0 .5.5h13a.5.5 0 0 0 .5-.5v-9a.5.5 0 0 0-.5-.5zm-13-1A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h13a1.5 1.5 0 0 0 1.5-1.5v-9A1.5 1.5 0 0 0 14.5 2h-13z" />
+										<path fill-rule="evenodd"
+                                              d="M5 8a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7A.5.5 0 0 1 5 8zm0-2.5a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5zm0 5a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5z" />
+										<circle cx="3.5" cy="5.5" r=".5" />
+										<circle cx="3.5" cy="8" r=".5" />
+										<circle cx="3.5" cy="10.5" r=".5" />
+									</svg>
+								</span>
+                            <span class="nav-link-text">Register new user</span>
+                        </a>
+                        <!--//nav-link-->
+                    </li>
+                    <!--//nav-item-->
+
+                </ul>
+                <!--//app-menu-->
+            </nav>
+            <!--//app-nav-->
+            <div class="app-sidepanel-footer">
+                <nav class="app-nav app-nav-footer">
+                    <ul class="app-menu footer-menu list-unstyled">
+
+                        <!--//nav-item-->
+                        <li class="nav-item">
+                            <!--//Bootstrap Icons: https://icons.getbootstrap.com/ -->
+                            <a class="nav-link" href="/logout">
+									<span class="nav-icon">
+										<svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-download"
+                                             fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+											<!-- <path fill-rule="evenodd"
+												d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z" /> -->
+											<path fill-rule="evenodd"
+                                                  d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z" />
+										</svg>
+									</span>
+                                <span class="nav-link-text">Log Out</span>
+                            </a>
+                            <!--//nav-link-->
+                        </li>
+                        <!--//nav-item-->
+
+                        <!--//nav-item-->
+                    </ul>
+                    <!--//footer-menu-->
+                </nav>
+            </div>
+            <!--//app-sidepanel-footer-->
+
+        </div>
+        <!--//sidepanel-inner-->
+    </div>
+    <!--//app-sidepanel-->
+</header>
+<!--//app-header-->
+
+<div class="app-wrapper">
+
+    <div class="app-content pt-3 p-md-3 p-lg-4">
+
+        <!--//container-fluid-->
+    </div>
+    <!--//app-content-->
+    <div class="app-content pt-3 p-md-3 p-lg-4">
+        <div class="container-xl">
+
+            <div class="row g-3 mb-4 align-items-center justify-content-between">
+                <div class="col-auto">
+                    <h1 class="app-page-title mb-0" th:if="${faculty.id != null}">Edit faculty</h1>
+                    <h1 class="app-page-title mb-0" th:if="${faculty.id == null}">Add faculty</h1>
+                </div>
+
+                <!--//col-auto-->
+            </div>
+            <!--//row-->
+            <div class="app-card app-card-basic d-flex flex-column align-items-start shadow-sm">
+                <div class="app-card-header p-3 px-4 border-bottom-0">
+                    <div class="row align-items-center gx-3">
+                        <form class="app-search-form" action="/admin/faculty/edit" th:object="${faculty}" method="post">
+                            <div class="col-auto p-2">
+                                <h4 class="app-card-title">Name</h4>
+                            </div>
+                            <div class="app-card-body p-2">
+                                <input type="text" name="Name" th:value="*{name}" placeholder="Name" class="form-control"
+                                       required="true">
+                            </div>
+                            <div class="col-auto p-2">
+                                <h4 class="app-card-title">Short info</h4>
+                            </div>
+                            <div class="app-card-body p-2">
+                                <input type="text" name="shortInformation" th:value="*{shortInformation}" placeholder="Points" class="form-control"
+                                       required="true">
+                            </div>
+                            <div class="col-auto p-2">
+                                <h4 class="app-card-title">Information</h4>
+                            </div>
+                            <div class="app-card-body p-2">
+                                <input type="text" name="information" th:value="*{information}" placeholder="Ratio" class="form-control"
+                                       required="true">
+                            </div>
+                            <div class="col-auto p-2">
+                                <h4 class="app-card-title">Faculty Rating</h4>
+                            </div>
+                            <div class="app-card-body p-2">
+                                <input type="text" name="facultyRating" th:value="*{facultyRating}" placeholder="Faculty Rating" class="form-control"
+                                       required="true">
+                            </div>
+                            <div class="col-auto p-2">
+                                <h4 class="app-card-title">Hostel Rating</h4>
+                            </div>
+                            <div class="app-card-body p-2">
+                                <input type="text" name="hostelRating" th:value="*{hostelRating}" placeholder="Hostel Rating" class="form-control"
+                                       required="true">
+                            </div>
+                            <div class="col-auto p-2">
+                                <h4 class="app-card-title">Student Asset Rating</h4>
+                            </div>
+                            <div class="app-card-body p-2">
+                                <input type="text" name="studentAssetRating" th:value="*{studentAssetRating}" placeholder="Student Asset Rating" class="form-control"
+                                       required="true">
+                            </div>
+                            <div class="col-auto p-2">
+                                <h4 class="app-card-title">Study Rating</h4>
+                            </div>
+                            <div class="app-card-body p-2">
+                                <input type="text" name="studyRating" th:value="*{studyRating}" placeholder="Study Rating" class="form-control"
+                                       required="true">
+                            </div>
+                            <div class="col-auto p-2">
+                                <h4 class="app-card-title">Campus</h4>
+                            </div>
+                            <div class="app-card-body p-2">
+                                <input type="text" name="campus" th:value="*{campus}" placeholder="Campus" class="form-control"
+                                       required="true">
+                            </div>
+                            <input type="hidden" name="id" th:value="${faculty.id}">
+                            <div class="app-card-footer p-2 mt-auto">
+                                <button type="submit" class="btn app-btn-primary">Confirm</button>
+                                <button type="reset" class="btn app-btn-secondary">Reset</button>
+
+                            </div>
+
+                        </form>
+                        <!--//col-->
+                    </div>
+                    <!--//row-->
+                </div>
+                <!--//app-card-header-->
+
+
+                <div class="app-search-box col">
+
+                </div>
+            </div>
+
+            <!--//app-card-footer-->
+        </div>
+        <!--//tab-content-->
+    </div>
+    <!--//app-footer-->
+</div>
+<!--//app-wrapper-->
+<!-- Javascript -->
+<script src="/assets/plugins/popper.min.js" th:src="@{/assets/plugins/popper.min.js}"></script>
+<script src="/assets/plugins/bootstrap/js/bootstrap.min.js"
+        th:src="@{/assets/plugins/bootstrap/js/bootstrap.min.js}"></script>
+
+<!-- Page Specific JS -->
+<script src="/assets/js/app.js" th:src="@{/assets/js/app.js}"></script>
+
 </body>
 
 </html>

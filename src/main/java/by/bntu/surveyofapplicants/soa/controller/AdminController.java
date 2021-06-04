@@ -276,5 +276,4 @@ public class AdminController {
         model.addAttribute("faculties",facultyService.getAllFaculties());
         return "editAnswer";
     }
-
 }

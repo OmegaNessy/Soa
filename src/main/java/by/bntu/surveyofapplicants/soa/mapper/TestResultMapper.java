@@ -11,6 +11,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.util.GregorianCalendar;
 import java.util.Objects;
 
 @Component
@@ -30,7 +31,8 @@ public class TestResultMapper {
 
 
     public TestResult toEntity(MobileDto dto, String result){
-        return new TestResult(dto.getTestId(), Objects.nonNull(dto.getStudent())?dto.getStudent().getId():null,result);
+        GregorianCalendar gc = new GregorianCalendar();
+        return new TestResult(dto.getTestId(), Objects.nonNull(dto.getStudent())?dto.getStudent().getId():null,result,gc.getTime());
     }
 
     public ResultDto toDto(TestResult entity){

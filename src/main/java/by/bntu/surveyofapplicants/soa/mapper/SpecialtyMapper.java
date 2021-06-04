@@ -13,7 +13,7 @@ import org.springframework.stereotype.Component;
 import java.util.Objects;
 
 @Component
-public class SpecialtyMapper{
+public class SpecialtyMapper {
 
     @Autowired
     ModelMapper modelMapper;
@@ -25,38 +25,38 @@ public class SpecialtyMapper{
     SubjectRepository subjectRepository;
 
     public Specialty toEntity(SpecialtyDto dto) {
-        return Objects.nonNull(dto) ? new Specialty(dto.getId(),obtainFaculty(dto.getFacultyName()),
-                             dto.getName(),
-                             dto.getInformation(),
-                             obtainSubject(dto.getThirdSubjectName()),
-                             obtainSubject(dto.getFirstSubjectName()),
-                             obtainSubject(dto.getSecondSubjectName()),
-                             Integer.valueOf(dto.getPassingScore())): null;
+        return Objects.nonNull(dto) ? new Specialty(dto.getId(), obtainFaculty(dto.getFacultyName()),
+                dto.getName(),
+                dto.getInformation(),
+                obtainSubject(dto.getFirstSubjectName()),
+                obtainSubject(dto.getSecondSubjectName()),
+                obtainSubject(dto.getThirdSubjectName()),
+                Integer.valueOf(dto.getPassingScore())) : null;
     }
 
     public SpecialtyDto toDto(Specialty entity) {
-        return Objects.nonNull(entity) ? new SpecialtyDto(entity.getId(),entity.getName(),
+        return Objects.nonNull(entity) ? new SpecialtyDto(entity.getId(), entity.getName(),
                 convertIdToFaculty(entity.getParentId()).getName(),
-                entity.getInformation(),entity.getPassingScore().toString(),
+                entity.getInformation(), entity.getPassingScore().toString(),
                 convertIdToSubject(entity.getFirstSubjectId()).getName(),
                 convertIdToSubject(entity.getSecondSubjectId()).getName(),
-                convertIdToSubject(entity.getThirdSubjectId()).getName()) : null ;
+                convertIdToSubject(entity.getThirdSubjectId()).getName()) : null;
     }
 
     private Long obtainSubject(String subjectName) {
-        return Objects.nonNull(subjectName) ? subjectRepository.findByName(subjectName).getId() :null;
+        return Objects.nonNull(subjectName) ? subjectRepository.findByName(subjectName).getId() : null;
     }
 
     private Long obtainFaculty(String facultyName) {
-        return Objects.nonNull(facultyName) ?  facultyRepository.findByName(facultyName).getId():null;
+        return Objects.nonNull(facultyName) ? facultyRepository.findByName(facultyName).getId() : null;
 
     }
 
-    private Faculty convertIdToFaculty(Long id){
+    private Faculty convertIdToFaculty(Long id) {
         return facultyRepository.findById(id).orElseThrow(NullPointerException::new);
     }
 
-    private Subject convertIdToSubject(Long id){
+    private Subject convertIdToSubject(Long id) {
         return subjectRepository.findById(id).orElseThrow(NullPointerException::new);
     }
 }
