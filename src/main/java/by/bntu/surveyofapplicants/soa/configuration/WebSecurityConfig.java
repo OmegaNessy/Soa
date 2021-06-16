@@ -1,5 +1,6 @@
 package by.bntu.surveyofapplicants.soa.configuration;
 
+import by.bntu.surveyofapplicants.soa.service.UserService;
 import by.bntu.surveyofapplicants.soa.service.impl.UserServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
