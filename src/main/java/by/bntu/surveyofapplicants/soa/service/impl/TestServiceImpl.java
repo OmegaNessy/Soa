@@ -62,6 +62,7 @@ public class TestServiceImpl implements TestService {
     public TestApiDto getGeneralTest(String value){
         return mapper.toApiDto(testRepository.findTestByTestType(value));
     }
+
     public List<TestDto> getAllTests(){
         List<TestDto> testsListDto = new ArrayList<>();
         List<Test> testsList = testRepository.findAll();

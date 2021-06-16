@@ -18,7 +18,7 @@ public class AnswerDto implements Serializable {
     @Size(min = 2, max = 255,message = "Вопрос не может быть пустым")
     private String answerText;
     @NotNull(message = "Не может быть пустым")
-    @Min(value = 1,message = "Не меньше 1")
+    @Min(value = 0,message = "Не меньше 0")
     @Max(value = 10,message = "Не больше 10")
     private Integer score;
     @NotEmpty(message = "Не может быть пустым")

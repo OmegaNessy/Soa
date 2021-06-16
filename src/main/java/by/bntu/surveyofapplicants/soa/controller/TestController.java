@@ -12,7 +12,7 @@ import java.util.List;
 
 @RestController
 public class TestController {
-    static final String GENERAL_TEST_NAME = "Общий";
+    static final String GENERAL_TEST_NAME = "Тест на определение факультета";
 
     @Autowired
     TestService service;
@@ -29,7 +29,8 @@ public class TestController {
 
     @GetMapping("/test/all")
     public List<TestApiDto> getAllTests(){
-        return service.getAllApiTests();
+        List<TestApiDto> list = service.getAllApiTests();
+        return list;
     }
 
     @PostMapping("/test/result/add")
