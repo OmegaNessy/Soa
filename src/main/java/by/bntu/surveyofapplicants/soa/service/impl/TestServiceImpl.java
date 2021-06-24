@@ -127,6 +127,10 @@ public class TestServiceImpl implements TestService {
         Optional<Map.Entry<String,Integer>> maxScore = resultMap.entrySet()
                 .stream()
                 .max(Map.Entry.comparingByValue());
-        return maxScore.map(Object::toString).orElse(null)+" из " + fullScore;
+        String result = maxScore.map(Object::toString).orElse(null);
+        if (result!=null){
+            result.concat(" из ").concat(String.valueOf(fullScore));
+        }
+        return result;
     }
 }
